@@ -1,0 +1,19 @@
+@if(currentSlide){
+
+<section>
+
+  <h1>{{ currentSlide.title }}</h1>
+
+  <p>{{ currentSlide.description }}</p>
+
+  @if(currentSlide.buttonText){
+    <button>{{ currentSlide.buttonText }}</button>
+  }
+
+</section>
+
+}@else{
+
+<p>Loading hero...</p>
+
+}
