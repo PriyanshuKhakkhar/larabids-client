@@ -1,0 +1,51 @@
+<section class="testimonials-section">
+
+  <!-- Section Header -->
+  <div class="section-header">
+    <span class="section-badge">Trusted by Thousands</span>
+    <h2 class="section-title">What Our Users Say</h2>
+    <p class="section-subtitle">
+      Real stories from buyers, sellers, and collectors who love AngBids.
+    </p>
+  </div>
+
+  <!-- Cards Grid -->
+  <div class="testimonials-grid">
+
+    @for (item of testimonials; track item.name) {
+
+      <div class="testimonial-card">
+
+        <!-- Quote Icon -->
+        <div class="quote-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M9.135 20H3V9.406C3 5.291 5.818 2.036 11 1l.806 1.862C8.918 3.65 7.194 5.408 6.818 8H9.135V20zm12 0H15V9.406C15 5.291 17.818 2.036 23 1l.806 1.862C20.918 3.65 19.194 5.408 18.818 8H21.135V20z"/>
+          </svg>
+        </div>
+
+        <!-- Star Rating -->
+        <div class="stars">
+          @for (star of getStars(item.stars); track $index) {
+            <span class="star">&#9733;</span>
+          }
+        </div>
+
+        <!-- Testimonial Text -->
+        <p class="testimonial-text">{{ item.text }}</p>
+
+        <!-- Author -->
+        <div class="author">
+          <div class="avatar">{{ item.initials }}</div>
+          <div class="author-info">
+            <strong class="author-name">{{ item.name }}</strong>
+            <span class="author-role">{{ item.role }}</span>
+          </div>
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+</section>

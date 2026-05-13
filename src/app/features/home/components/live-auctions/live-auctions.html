@@ -1,0 +1,37 @@
+<section class="live-section">
+
+  <h2>Live Auctions</h2>
+
+  <div class="live-grid">
+
+    @for(item of auctions; track item.id){
+
+      <div class="live-card">
+
+        <h3>{{ item.title }}</h3>
+
+        <p class="price">
+          {{ item.price }}
+        </p>
+
+        @if(item.secondsLeft > 0){
+
+          <p class="timer">
+            {{ item.secondsLeft }}s left
+          </p>
+
+        } @else {
+
+          <p class="ended">
+            Auction Ended
+          </p>
+
+        }
+
+      </div>
+
+    }
+
+  </div>
+
+</section>

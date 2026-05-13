@@ -1,48 +1,143 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top py-3">
+<nav class="navbar navbar-expand-lg navbar-elite sticky-top">
   <div class="container">
+      <a class="navbar-brand text-decoration-none" routerLink="/">
+          <i class="fas fa-gavel brand-icon fs-4"></i>
+          <span class="gold-text display-font fw-bold fs-3">{{ brandName }}</span>
+      </a>
+      
+      <button class="navbar-toggler border-0 text-dark bg-light" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarNav">
+          <i class="fas fa-bars"></i>
+      </button>
 
-    <a class="navbar-brand" href="/">
-      <span class="gold-text display-font fw-bold fs-3">
-        {{ brandName }}
-      </span>
-    </a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto mb-3 mb-lg-0 align-items-lg-center mt-3 mt-lg-0">
+              @for (item of navItems; track item.label) {
+              <li class="nav-item">
+                  <a class="nav-link" [routerLink]="item.route" routerLinkActive="active" [routerLinkActiveOptions]="{exact: item.route === '/'}">
+                      {{ item.label }}
+                  </a>
+              </li>
+              }
+          </ul>
+          
+          <div class="d-flex flex-column flex-lg-row gap-3 align-items-lg-center pb-3 pb-lg-0">
+              <!-- Search Bar -->
+              <form class="nav-search" (submit)="$event.preventDefault()">
+                  <button type="submit" class="search-submit-btn">
+                      <i class="fas fa-search"></i>
+                  </button>
+                  <input type="search" name="q" class="form-control" placeholder="Search auctions...">
+              </form>
 
-    <button
-      class="navbar-toggler border-0 text-dark"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav">
+              @if (!isLoggedIn) {
+                  <!-- Guest State -->
+                  <div class="d-flex flex-column flex-sm-row gap-2 w-100 justify-content-lg-end mt-2 mt-lg-0">
+                      <a routerLink="/login" class="btn btn-outline-primary btn-sm flex-fill flex-lg-grow-0 text-center">Sign In</a>
+                      <a routerLink="/register" class="btn btn-primary btn-sm flex-fill flex-lg-grow-0 text-center">Join Now</a>
+                  </div>
+              } @else {
+                  <!-- Member State -->
+                  <div class="d-flex align-items-center gap-3 mt-2 mt-lg-0 justify-content-between justify-content-lg-end w-100">
+                      
+                      <!-- Quick Action -->
+                      <a routerLink="/auctions/create" class="btn btn-primary btn-sm d-flex align-items-center gap-2">
+                          <i class="fas fa-plus-circle"></i> <span>Sell Item</span>
+                      </a>
+                      
+                      <div class="d-flex align-items-center gap-3">
+                          <!-- Notifications -->
+                          <div class="dropdown">
+                              <a class="notification-bell text-decoration-none position-relative" href="#" id="alertsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  <i class="fas fa-bell"></i>
+                                  @if (unreadNotificationsCount > 0) {
+                                      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-white" style="font-size: 0.65rem;">
+                                          {{ unreadNotificationsCount > 9 ? '9+' : unreadNotificationsCount }}
+                                      </span>
+                                  }
+                              </a>
+                              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="alertsDropdown" style="width: 320px; max-height: 400px; overflow-y: auto;">
+                                  <li class="px-3 py-2 d-flex justify-content-between align-items-center">
+                                      <h6 class="mb-0 fw-bold text-dark">Notifications</h6>
+                                      <span class="badge bg-primary rounded-pill">{{ unreadNotificationsCount }} New</span>
+                                  </li>
+                                  <li><hr class="dropdown-divider mb-1"></li>
 
-      <i class="fas fa-bars"></i>
-    </button>
+                                  @for (notification of notifications; track notification.id) {
+                                      <li class="px-2">
+                                          <a class="dropdown-item notification-link" 
+                                             [class.bg-light]="!notification.read_at"
+                                             [routerLink]="notification.link">
+                                              <div class="d-flex w-100 align-items-start gap-3">
+                                                  <div class="flex-shrink-0 mt-1">
+                                                      <div class="rounded-circle d-flex align-items-center justify-content-center text-white" 
+                                                           [class.bg-danger]="notification.type === 'auction_cancelled'"
+                                                           [class.bg-primary]="notification.type !== 'auction_cancelled'"
+                                                           style="width: 32px; height: 32px;">
+                                                          <i class="fas fa-sm" [class.fa-gavel]="notification.type === 'auction_cancelled'" [class.fa-bell]="notification.type !== 'auction_cancelled'"></i>
+                                                      </div>
+                                                  </div>
+                                                  <div class="flex-grow-1 overflow-hidden">
+                                                      <div class="d-flex justify-content-between align-items-center mb-1">
+                                                          <span class="fw-bold text-dark text-sm text-truncate pe-2">{{ notification.title }}</span>
+                                                          <small class="text-muted text-xs">{{ notification.time }}</small>
+                                                      </div>
+                                                      <p class="text-secondary mb-0 text-sm text-wrap lh-sm">{{ notification.message }}</p>
+                                                  </div>
+                                              </div>
+                                          </a>
+                                      </li>
+                                  } @empty {
+                                      <li>
+                                          <div class="text-center text-muted py-4">
+                                              <div class="mb-2">
+                                                  <i class="fas fa-bell-slash fa-2x text-light"></i>
+                                              </div>
+                                              <p class="mb-0 text-sm">You're all caught up!</p>
+                                          </div>
+                                      </li>
+                                  }
 
-    <div class="collapse navbar-collapse" id="navbarNav">
+                                  @if (notifications.length > 0) {
+                                      <li><hr class="dropdown-divider mt-1"></li>
+                                      <li><a class="dropdown-item text-center text-primary text-sm py-2 fw-medium d-block" routerLink="/user/notifications">View All Activity</a></li>
+                                  }
+                              </ul>
+                          </div>
 
-      <ul class="navbar-nav mx-auto">
-
-        @for (item of navItems; track item.label) {
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="item.route">
-              {{ item.label }}
-            </a>
-          </li>
-        }
-
-      </ul>
-
-      <div class="d-flex gap-3 align-items-center">
-
-        <button class="btn btn-outline-primary px-4 btn-sm">
-          Sign In
-        </button>
-
-        <button class="btn btn-primary px-4 btn-sm fw-bold">
-          Join Now
-        </button>
-
+                          <!-- User Dropdown -->
+                          <div class="dropdown">
+                              <a href="#" class="d-flex align-items-center text-decoration-none" data-bs-toggle="dropdown" style="cursor: pointer;">
+                                  <img [src]="currentUser.avatarUrl"
+                                      class="rounded-circle border border-2 border-white shadow-sm transition-fast" height="40" width="40" style="object-fit: cover;" alt="Avatar">
+                              </a>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                  <li class="px-3 py-2">
+                                      <div class="fw-bold text-dark">{{ currentUser.username }}</div>
+                                      <div class="text-muted text-xs">{{ currentUser.email }}</div>
+                                  </li>
+                                  <li><hr class="dropdown-divider"></li>
+                                  
+                                  @for (item of userMenu; track item.label) {
+                                      <li>
+                                          <a class="dropdown-item" [routerLink]="item.route">
+                                              <i [class]="item.icon"></i> {{ item.label }}
+                                          </a>
+                                      </li>
+                                  }
+                                  
+                                  <li><hr class="dropdown-divider"></li>
+                                  <li>
+                                      <button class="dropdown-item text-danger">
+                                          <i class="fas fa-sign-out-alt"></i> Sign out
+                                      </button>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              }
+          </div>
       </div>
-
-    </div>
-
   </div>
 </nav>
