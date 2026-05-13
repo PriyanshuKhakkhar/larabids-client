@@ -1,0 +1,29 @@
+.categories {
+  padding: 60px 80px;
+}
+
+.categories h2 {
+  margin-bottom: 30px;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.category-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.category-card {
+  width: 200px;
+  padding: 30px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+}

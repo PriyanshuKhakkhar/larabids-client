@@ -1,0 +1,25 @@
+<section>
+
+  <h2>Featured Auctions</h2>
+
+  <div class="cards">
+
+    @for(item of auctions; track item.title){
+
+      <div class="card">
+
+        <img [src]="item.image" alt="">
+
+        <h3>{{ item.title }}</h3>
+
+        <p class="price">{{ item.price }}</p>
+
+        <p class="bids">{{ item.bids }} bids</p>
+
+      </div>
+
+    }
+
+  </div>
+
+</section>
