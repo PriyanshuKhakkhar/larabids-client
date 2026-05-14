@@ -1,0 +1,147 @@
+<footer class="footer-section pt-5 pb-4 bg-white border-top border-light-subtle">
+  <div class="container pt-lg-4">
+    
+    <!-- Main Footer Multi-Column Grid -->
+    <div class="row g-4 mb-5 justify-content-between pb-4 border-bottom border-light-subtle">
+      
+      <!-- Column 1: Logo & Marketplace Description -->
+      <div class="col-sm-12 col-lg-3 text-center text-lg-start">
+        <a routerLink="/" class="text-decoration-none d-inline-flex align-items-center mb-3 brand-wrapper">
+          <span class="fs-3 fw-extrabold text-primary tracking-tight">{{ info.brandName }}</span>
+          <span class="badge bg-primary-subtle text-primary fw-bold text-xs ms-2 rounded-pill border border-primary-subtle">AUCTIONS</span>
+        </a>
+        <p class="text-secondary small mb-3 lh-base pe-lg-2">
+          {{ info.tagline }}
+        </p>
+      </div>
+
+      <!-- Column 2: Quick Links -->
+      <div class="col-6 col-sm-4 col-lg-2">
+        <h5 class="h6 fw-bold text-dark mb-3 tracking-tight footer-heading">
+          Quick Links
+        </h5>
+        <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+          @for (link of quickLinks; track link.label) {
+            <li>
+              <a [routerLink]="link.url" class="text-decoration-none text-secondary small footer-link transition-colors d-inline-flex align-items-center gap-1">
+                <span class="link-arrow">&rsaquo;</span>
+                <span>{{ link.label }}</span>
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Column 3: Categories Links -->
+      <div class="col-6 col-sm-4 col-lg-2">
+        <h5 class="h6 fw-bold text-dark mb-3 tracking-tight footer-heading">
+          Top Categories
+        </h5>
+        <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+          @for (cat of categories; track cat.label) {
+            <li>
+              <a [routerLink]="cat.url" class="text-decoration-none text-secondary small footer-link transition-colors d-inline-flex align-items-center gap-1">
+                <span class="link-arrow">&rsaquo;</span>
+                <span>{{ cat.label }}</span>
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Column 4: Contact Info -->
+      <div class="col-12 col-sm-4 col-lg-2.5">
+        <h5 class="h6 fw-bold text-dark mb-3 tracking-tight footer-heading text-center text-sm-start">
+          Contact Info
+        </h5>
+        <ul class="list-unstyled mb-0 d-flex flex-column gap-2.5 text-center text-sm-start">
+          @for (item of contactInfo; track item.label) {
+            <li class="d-inline-flex align-items-center gap-2 text-secondary small justify-content-center justify-content-sm-start w-100">
+              <span class="text-primary flex-shrink-0">
+                @switch (item.iconId) {
+                  @case ('email') {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                  }
+                  @case ('phone') {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                  }
+                  @case ('location') {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  }
+                  @default {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6"/></svg>
+                  }
+                }
+              </span>
+              <span class="text-truncate" [title]="item.text">{{ item.text }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Column 5: Newsletter Input Block -->
+      <div class="col-sm-12 col-lg-2.5 text-center text-lg-start">
+        <h5 class="h6 fw-bold text-dark mb-2 tracking-tight footer-heading">
+          Newsletter
+        </h5>
+        <p class="text-secondary text-xs mb-3">
+          Stay updated with high-value lot finalizations.
+        </p>
+
+        <!-- Form Setup -->
+        <form (submit)="onSubscribe($event, emailInput)" class="newsletter-form d-flex flex-column gap-2 max-w-sm mx-auto mx-lg-0 position-relative">
+          <div class="input-group premium-input-group shadow-sm rounded-pill overflow-hidden p-1 border border-light-subtle bg-light-subtle w-100">
+            <input type="email" #emailInput class="form-control bg-transparent border-0 shadow-none ps-3 text-xs" placeholder="Email address..." required>
+            <button type="submit" class="btn btn-primary rounded-pill px-3 fw-bold text-xs">
+              Join
+            </button>
+          </div>
+        </form>
+
+        <!-- Subscription feedback indicator -->
+        @if (subscribed) {
+          <div class="mt-2 text-success text-xs fw-semibold">
+            &check; Subscribed successfully!
+          </div>
+        }
+      </div>
+
+    </div>
+
+    <!-- Bottom Row: Copyright with Current Year & Dynamic Social Icons -->
+    <div class="d-flex flex-column flex-md-row align-items-center justify-content-between pt-2 gap-3">
+      
+      <!-- Copyright string -->
+      <div class="text-secondary text-xs text-center text-md-start order-2 order-md-1">
+        &copy; {{ currentYear }}{{ info.copyrightPrefix }} Built with precision for AngBids platform.
+      </div>
+
+      <!-- Social Icons mapping -->
+      <div class="d-flex align-items-center gap-2 order-1 order-md-2 socials-container justify-content-center">
+        @for (social of socials; track social.platform) {
+          <a [href]="social.url" target="_blank" rel="noopener noreferrer" class="social-icon-btn rounded-circle d-flex align-items-center justify-content-center text-secondary bg-light-subtle border border-light-subtle transition-all" [title]="social.platform">
+            @switch (social.iconId) {
+              @case ('twitter') {
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              }
+              @case ('linkedin') {
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.34 1.3v-1.11h-2.8v8.37h2.8v-4.67c0-.25.02-.5.1-.68a1.18 1.18 0 0 1 1.1-.81c.8 0 1.12.61 1.12 1.5v4.66h2.88M6.5 8.41a1.44 1.44 0 1 0 0-2.88 1.44 1.44 0 0 0 0 2.88m1.4 10.09v-8.37H5.1v8.37h2.8z"/></svg>
+              }
+              @case ('instagram') {
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              }
+              @case ('github') {
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 8.84 21.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+              }
+              @default {
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+              }
+            }
+          </a>
+        }
+      </div>
+
+    </div>
+
+  </div>
+</footer>

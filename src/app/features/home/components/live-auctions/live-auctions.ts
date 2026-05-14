@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LIVE_AUCTIONS } from '../../../../core/constants/live-auction-data';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-live-auctions',
   standalone: true,
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './live-auctions.html',
   styleUrl: './live-auctions.scss'
 })

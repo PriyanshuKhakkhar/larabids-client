@@ -1,0 +1,100 @@
+// Variables matching website theme configuration
+$primary: #4f46e5;
+$primary-hover: #4338ca;
+$text-dark: #0f172a;
+$text-secondary: #64748b;
+
+.footer-section {
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+// Typography custom helpers
+.fw-extrabold {
+  font-weight: 800;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.tracking-tight {
+  letter-spacing: -0.01em;
+}
+
+// Brand Branding
+.brand-wrapper {
+  transition: opacity 0.2s ease;
+  
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+// Form UI styling
+.premium-input-group {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-color: rgba(226, 232, 240, 0.8) !important;
+  background-color: #f8fafc !important;
+
+  &:focus-within {
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1) !important;
+    border-color: $primary !important;
+    background-color: #ffffff !important;
+  }
+
+  input::placeholder {
+    color: #94a3b8;
+  }
+}
+
+// Links Stack
+.footer-heading {
+  font-size: 0.95rem;
+  color: $text-dark;
+}
+
+.footer-link {
+  color: $text-secondary;
+  transition: all 0.2s ease;
+
+  .link-arrow {
+    color: rgba(79, 70, 229, 0.4);
+    transition: transform 0.2s ease;
+    font-size: 1.1rem;
+    line-height: 0.5;
+  }
+
+  &:hover {
+    color: $primary;
+    transform: translateX(3px);
+
+    .link-arrow {
+      color: $primary;
+      transform: translateX(2px);
+    }
+  }
+}
+
+// Social Buttons Row
+.social-icon-btn {
+  width: 36px;
+  height: 36px;
+  background-color: #f8fafc;
+  border-color: rgba(226, 232, 240, 0.8) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    background-color: $primary;
+    color: #ffffff !important;
+    border-color: $primary !important;
+    transform: translateY(-3px) rotate(4deg);
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+  }
+}
+
+// Utilities
+.max-w-sm {
+  max-width: 320px;
+}

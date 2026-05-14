@@ -7,10 +7,11 @@ import { Categories } from './features/home/components/categories/categories';
 import { LiveAuctions } from './features/home/components/live-auctions/live-auctions';
 import { Stats } from './features/home/components/stats/stats';
 import { TestimonialsComponent } from './features/home/components/testimonials/testimonials';
+import { Footer } from './layout/footer/footer';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navbar, Hero, Featured, Categories, LiveAuctions, Stats, TestimonialsComponent],
+  imports: [RouterOutlet, Navbar, Hero, Featured, Categories, LiveAuctions, Stats, TestimonialsComponent, Footer],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
