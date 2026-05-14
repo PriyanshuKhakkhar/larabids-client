@@ -1,19 +1,83 @@
-@if(currentSlide){
+<section class="hero-section">
+  <!-- Decorative background elements -->
+  <div class="hero-bg-glow glow-1"></div>
+  <div class="hero-bg-glow glow-2"></div>
+  
+  <div class="container h-100">
+    @if(currentSlide) {
+      <div class="row align-items-center h-100 py-5">
+        
+        <!-- Left Content -->
+        <div class="col-lg-6 hero-content text-center text-lg-start mb-5 mb-lg-0">
+          <div class="badge-pill mb-3 fade-in-up" style="animation-delay: 0.1s;">
+            <i class="fas fa-sparkles me-2"></i> {{ currentSlide.badge }}
+          </div>
+          
+          <h1 class="display-3 fw-extrabold mb-4 hero-title fade-in-up" style="animation-delay: 0.2s;">
+            {{ currentSlide.titlePrefix }}
+            <br class="d-none d-lg-block">
+            <span class="text-gradient">{{ currentSlide.titleHighlight }}</span>
+          </h1>
+          
+          <p class="lead text-secondary mb-5 hero-subtitle fade-in-up mx-auto mx-lg-0" style="animation-delay: 0.3s;">
+            {{ currentSlide.description }}
+          </p>
+          
+          <div class="hero-actions d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 fade-in-up" style="animation-delay: 0.4s;">
+            <a [routerLink]="currentSlide.primaryButtonLink" class="btn btn-primary btn-lg rounded-pill px-5 py-3 shadow-lg btn-glow fw-bold">
+              {{ currentSlide.primaryButtonText }}
+            </a>
+            <a [routerLink]="currentSlide.secondaryButtonLink" class="btn btn-outline-primary btn-lg rounded-pill px-5 py-3 bg-white fw-bold">
+              {{ currentSlide.secondaryButtonText }}
+            </a>
+          </div>
 
-<section>
+          <div class="hero-features mt-5 d-flex gap-4 justify-content-center justify-content-lg-start fade-in-up" style="animation-delay: 0.5s;">
+            @for (feature of currentSlide.features; track feature.text) {
+              <div class="feature-item d-flex align-items-center text-secondary">
+                <div class="feature-icon-wrapper me-2">
+                  <i [class]="feature.icon"></i>
+                </div>
+                <span class="fw-semibold small">{{ feature.text }}</span>
+              </div>
+            }
+          </div>
+        </div>
 
-  <h1>{{ currentSlide.title }}</h1>
+        <!-- Right Illustration -->
+        <div class="col-lg-6 position-relative hero-illustration d-none d-lg-block fade-in" style="animation-delay: 0.3s;">
+          <div class="illustration-wrapper text-center">
+            <img [src]="currentSlide.image" [alt]="currentSlide.titleHighlight" class="img-fluid floating-img">
+            
+            <!-- Floating Badge -->
+            <div class="floating-badge badge-top-right">
+              <div class="d-flex align-items-center">
+                <div class="pulse-ring me-2"></div>
+                <span class="fw-bold small text-dark">Live Now</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    } @else {
+      <div class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    }
+  </div>
 
-  <p>{{ currentSlide.description }}</p>
-
-  @if(currentSlide.buttonText){
-    <button>{{ currentSlide.buttonText }}</button>
-  }
-
+  <!-- Slider Dots -->
+  <div class="hero-slider-controls position-absolute bottom-0 start-50 translate-middle-x mb-4 d-flex gap-2">
+    @for (slide of slides; track $index) {
+      <button 
+        class="slider-dot" 
+        [class.active]="currentIndex === $index"
+        (click)="goToSlide($index)"
+        [attr.aria-label]="'Go to slide ' + ($index + 1)">
+      </button>
+    }
+  </div>
 </section>
-
-}@else{
-
-<p>Loading hero...</p>
-
-}
