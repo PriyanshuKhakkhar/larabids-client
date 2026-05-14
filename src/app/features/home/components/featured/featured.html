@@ -1,25 +1,94 @@
-<section>
-
-  <h2>Featured Auctions</h2>
-
-  <div class="cards">
-
-    @for(item of auctions; track item.title){
-
-      <div class="card">
-
-        <img [src]="item.image" alt="">
-
-        <h3>{{ item.title }}</h3>
-
-        <p class="price">{{ item.price }}</p>
-
-        <p class="bids">{{ item.bids }} bids</p>
-
+<section class="featured-section py-5 bg-light-subtle">
+  <div class="container py-lg-4">
+    <!-- Section Header -->
+    <div class="row align-items-end mb-5">
+      <div class="col-lg-8 text-center text-lg-start">
+        <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-primary-subtle text-primary fw-semibold small mb-3 badge-premium">
+          <span class="live-dot"></span> Live & Trending Marketplace
+        </div>
+        <h2 class="display-5 fw-extrabold mb-0 text-dark">Featured Auctions</h2>
+        <p class="text-secondary mt-2 mb-0 lead">Discover unique premium items closing soon with highly active bidding.</p>
       </div>
+      <div class="col-lg-4 text-center text-lg-end mt-4 mt-lg-0">
+        <a routerLink="/auctions" class="btn btn-outline-primary rounded-pill px-4 py-2 fw-bold d-inline-flex align-items-center gap-2 btn-explore">
+          <span>Explore All</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+    </div>
 
-    }
+    <!-- Responsive Grid -->
+    <div class="row g-4">
+      @for(item of auctions; track item.title) {
+        <div class="col-sm-6 col-lg-3">
+          <div class="card premium-card h-100 border-0 bg-white">
+            
+            <!-- Image Wrapper with Zoom & Overlay Badges -->
+            <div class="card-img-wrapper position-relative overflow-hidden">
+              <img [src]="item.image" [alt]="item.title" class="card-img-top zoom-img">
+              
+              <!-- Category Badge Top Left -->
+              <div class="position-absolute top-0 start-0 m-3 z-2">
+                <span class="badge bg-white text-dark shadow-sm px-3 py-1 fw-bold rounded-pill border border-light-subtle category-badge">
+                  {{ item.category }}
+                </span>
+              </div>
+              
+              <!-- Live Badge Top Right -->
+              @if(item.isLive) {
+                <div class="position-absolute top-0 end-0 m-3 z-2">
+                  <span class="badge bg-danger text-white shadow-sm px-2 py-1 fw-bold rounded-pill d-flex align-items-center gap-1 small-badge">
+                    <span class="pulse-dot"></span> <span class="text-xs">LIVE</span>
+                  </span>
+                </div>
+              }
 
+              <!-- Time Left Overlay at Bottom of Image -->
+              <div class="position-absolute bottom-0 start-0 w-100 p-2 z-2 overlay-timer-wrapper">
+                <div class="timer-badge mx-2 py-1 px-3 rounded-pill text-center d-flex align-items-center justify-content-center gap-2 shadow-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span class="fw-bold text-dark text-xs tracking-tight">{{ item.timeLeft }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="card-body p-4 d-flex flex-column">
+              <!-- Seller Info -->
+              <div class="d-flex align-items-center gap-2 mb-3 seller-info">
+                <img [src]="item.avatar" [alt]="item.seller" class="rounded-circle object-fit-cover border border-light-subtle" width="24" height="24">
+                <span class="text-secondary small fw-medium text-truncate">{{ item.seller }}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="text-primary ms-auto flex-shrink-0" title="Verified Seller"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              </div>
+
+              <!-- Title -->
+              <h3 class="h6 fw-bold text-dark mb-3 auction-title flex-grow-1">
+                {{ item.title }}
+              </h3>
+
+              <!-- Price & Bids Row -->
+              <div class="d-flex align-items-center justify-content-between pt-3 border-top mt-auto mb-4 price-row">
+                <div>
+                  <span class="text-secondary text-xs d-block lh-1 mb-1 fw-medium">Current Bid</span>
+                  <span class="fs-5 fw-extrabold text-primary">{{ item.price }}</span>
+                </div>
+                <div class="text-end">
+                  <span class="badge bg-light text-secondary border border-light-subtle px-2 py-1 fw-semibold rounded-2 text-xs">
+                    {{ item.bids }} Bids
+                  </span>
+                </div>
+              </div>
+
+              <!-- CTA Button -->
+              <button class="btn btn-primary w-100 rounded-pill py-2 fw-bold shadow-sm btn-bid d-flex align-items-center justify-content-center gap-2">
+                <span>Place Bid</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      }
+    </div>
   </div>
-
 </section>

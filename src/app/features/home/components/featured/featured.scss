@@ -1,45 +1,195 @@
-section {
-  padding: 60px 80px;
+// Variables
+$primary: #4f46e5;
+$primary-hover: #4338ca;
+$text-dark: #0f172a;
+$text-secondary: #64748b;
+$border-radius-card: 20px;
+$border-radius-inner: 16px;
+
+.featured-section {
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow: hidden;
 }
 
-h2 {
-  margin-bottom: 30px;
-  font-size: 32px;
-  font-weight: bold;
+// Typography custom helpers
+.fw-extrabold {
+  font-weight: 800;
+  color: $text-dark;
 }
 
-.cards {
-  display: flex;
-  gap: 20px;
+.text-xs {
+  font-size: 0.75rem;
 }
 
-.card {
-  width: 300px;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,.1);
-  background: white;
+.tracking-tight {
+  letter-spacing: -0.01em;
 }
 
-.card h3 {
-  margin-bottom: 15px;
+// Section Header Badges
+.badge-premium {
+  border: 1px solid rgba(79, 70, 229, 0.15);
+  background-color: rgba(79, 70, 229, 0.05) !important;
 }
 
-.price {
-  font-size: 22px;
-  font-weight: bold;
-  color: #2563eb;
+.live-dot {
+  width: 8px;
+  height: 8px;
+  background-color: $primary;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 8px rgba(79, 70, 229, 0.6);
 }
 
-.bids {
-  margin-top: 10px;
-  color: gray;
+// Premium Card Styling
+.premium-card {
+  border-radius: $border-radius-card;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 4px 10px -3px rgba(15, 23, 42, 0.02);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  border: 1px solid rgba(226, 232, 240, 0.8) !important;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 35px -5px rgba(15, 23, 42, 0.1), 0 8px 15px -5px rgba(15, 23, 42, 0.04);
+    border-color: rgba(79, 70, 229, 0.2) !important;
+
+    .zoom-img {
+      transform: scale(1.08);
+    }
+
+    .auction-title {
+      color: $primary !important;
+    }
+
+    .btn-bid {
+      background-color: $primary-hover;
+      transform: scale(1.02);
+    }
+  }
 }
 
-img {
+// Image Wrapper & Zoom Animation
+.card-img-wrapper {
+  height: 220px;
+  border-top-left-radius: $border-radius-card;
+  border-top-right-radius: $border-radius-card;
+  background-color: #f8fafc;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0) 40%);
+    z-index: 1;
+    pointer-events: none;
+  }
+}
+
+.zoom-img {
   width: 100%;
-  height: 180px;
+  height: 100%;
   object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 15px;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+// Badges & Timer Overlay
+.category-badge {
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(4px);
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.small-badge {
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse-dot-anim 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse-dot-anim {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.8); opacity: 0.5; }
+}
+
+.overlay-timer-wrapper {
+  z-index: 3 !important;
+}
+
+.timer-badge {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 1);
+  }
+}
+
+// Card Body Components
+.auction-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+  height: 2.8em; // fixed height for 2 lines to maintain uniform grid alignment
+  transition: color 0.2s ease;
+}
+
+.seller-info {
+  img {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+}
+
+.price-row {
+  border-color: rgba(241, 245, 249, 1) !important;
+}
+
+// Custom Buttons
+.btn-bid {
+  background-color: $primary;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 0.9rem;
+  
+  &:active {
+    transform: scale(0.98) !important;
+  }
+}
+
+.btn-explore {
+  border-color: rgba(79, 70, 229, 0.3);
+  color: $primary;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $primary;
+    color: #fff;
+    border-color: $primary;
+    transform: translateX(4px);
+  }
+}
+
+// Responsive Grid Tweaks
+@media (max-width: 575px) {
+  .card-img-wrapper {
+    height: 200px;
+  }
+  .auction-title {
+    font-size: 1rem;
+  }
 }
