@@ -1,178 +1,110 @@
-// ─────────────────────────────────────────────
-// Testimonials Section
-// Theme: #4e73df blue, white cards, premium feel
-// ─────────────────────────────────────────────
+// Variables matching homepage theme layout
+$primary: #4f46e5;
+$primary-light: #818cf8;
+$text-dark: #0f172a;
+$text-secondary: #64748b;
+$border-radius-card: 20px;
 
 .testimonials-section {
-  padding: 100px 7%;
-  background: linear-gradient(160deg, #f0f4ff 0%, #ffffff 100%);
-  text-align: center;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #ffffff;
   overflow: hidden;
 }
 
-// ─── Section Header ─────────────────────────
-
-.section-header {
-  margin-bottom: 64px;
-}
-
-.section-badge {
-  display: inline-block;
-  background: rgba(78, 115, 223, 0.12);
-  color: #4e73df;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding: 6px 18px;
-  border-radius: 50px;
-  margin-bottom: 18px;
-}
-
-.section-title {
-  font-size: clamp(32px, 5vw, 48px);
+// Typography custom helpers
+.fw-extrabold {
   font-weight: 800;
-  color: #1a1f36;
-  margin: 0 0 16px;
-  line-height: 1.2;
+  color: $text-dark;
 }
 
-.section-subtitle {
-  font-size: 17px;
-  color: #6b7a99;
-  max-width: 520px;
-  margin: 0 auto;
-  line-height: 1.7;
+.text-xs {
+  font-size: 0.75rem;
 }
 
-// ─── Cards Grid ─────────────────────────────
-
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  max-width: 1200px;
-  margin: 0 auto;
-
-  @media (max-width: 960px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-  }
+.tracking-wide {
+  letter-spacing: 0.05em;
 }
 
-// ─── Individual Card ─────────────────────────
+// Header Badge
+.badge-social-proof {
+  border: 1px solid rgba(79, 70, 229, 0.2);
+  background-color: rgba(79, 70, 229, 0.05) !important;
+}
 
+// Testimonial Cards
 .testimonial-card {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 40px 36px;
-  text-align: left;
-  box-shadow: 0 8px 40px rgba(78, 115, 223, 0.10);
-  border: 1px solid rgba(78, 115, 223, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  border-radius: $border-radius-card;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-color: rgba(226, 232, 240, 0.8) !important;
 
-  // Subtle accent line at top
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+  // Custom static accent ribbon
+  .card-ribbon {
     height: 4px;
-    background: linear-gradient(90deg, #4e73df, #6c8fff);
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    background: linear-gradient(90deg, rgba(79, 70, 229, 0.15), rgba(129, 140, 248, 0.15));
+    transition: all 0.4s ease;
   }
 
+  .quote-watermark {
+    opacity: 0.03;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    right: -10px;
+    top: -10px;
+  }
+
+  .quote-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  // Hover elevation interactions
   &:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 60px rgba(78, 115, 223, 0.18);
+    box-shadow: 0 20px 35px -5px rgba(15, 23, 42, 0.08), 0 8px 15px -5px rgba(15, 23, 42, 0.03);
+    border-color: rgba(79, 70, 229, 0.25) !important;
 
-    &::before {
-      opacity: 1;
+    .card-ribbon {
+      background: linear-gradient(90deg, #4f46e5, #7c3aed);
+      height: 5px;
+    }
+
+    .quote-watermark {
+      opacity: 0.08;
+      transform: scale(1.1) rotate(-5deg);
+    }
+
+    .author-name {
+      color: $primary !important;
+      transition: color 0.2s ease;
     }
   }
 }
 
-// ─── Quote Icon ──────────────────────────────
+// Avatar Container Stack
+.avatar-container {
+  width: 48px;
+  height: 48px;
 
-.quote-icon {
-  color: rgba(78, 115, 223, 0.20);
-  margin-bottom: 16px;
+  .avatar-initials {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+    box-shadow: 0 2px 6px rgba(79, 70, 229, 0.2);
+  }
 
-  svg {
-    display: block;
+  .avatar-img {
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.08);
+    }
   }
 }
 
-// ─── Stars ───────────────────────────────────
-
-.stars {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 20px;
-}
-
-.star {
-  color: #f6c90e;
-  font-size: 18px;
-  line-height: 1;
-}
-
-// ─── Text ────────────────────────────────────
-
-.testimonial-text {
-  font-size: 16px;
-  color: #4a5568;
-  line-height: 1.8;
-  margin: 0 0 32px;
-}
-
-// ─── Author ──────────────────────────────────
-
-.author {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding-top: 24px;
-  border-top: 1px solid #f0f2f8;
-}
-
-.avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #4e73df, #6c8fff);
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 12px rgba(78, 115, 223, 0.30);
-}
-
-.author-info {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.author-name {
-  font-size: 15px;
-  font-weight: 700;
-  color: #1a1f36;
-}
-
-.author-role {
-  font-size: 13px;
-  color: #4e73df;
-  font-weight: 500;
+// Utilities
+.pointer-events-none {
+  pointer-events: none;
 }

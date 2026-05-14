@@ -1,51 +1,88 @@
-<section class="testimonials-section">
+<section class="testimonials-section py-5 bg-white">
+  <div class="container py-lg-5">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-5">
+      <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-primary-subtle text-primary fw-bold text-xs tracking-wide mb-3 badge-social-proof">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        <span>VERIFIED SOCIAL PROOF</span>
+      </div>
+      <h2 class="display-6 fw-extrabold text-dark mb-3">Collector & Seller Testimonials</h2>
+      <p class="text-secondary lead mb-0 mx-auto" style="max-width: 650px;">
+        Discover how top-tier marketplace liquidity enables reliable transaction outcomes for rare items.
+      </p>
+    </div>
 
-  <!-- Section Header -->
-  <div class="section-header">
-    <span class="section-badge">Trusted by Thousands</span>
-    <h2 class="section-title">What Our Users Say</h2>
-    <p class="section-subtitle">
-      Real stories from buyers, sellers, and collectors who love AngBids.
-    </p>
-  </div>
+    <!-- Cards Grid -->
+    <div class="row g-4 justify-content-center">
+      @for (item of testimonials; track item.id) {
+        <div class="col-md-6 col-lg-4">
+          <div class="card testimonial-card h-100 border border-light-subtle premium-lift position-relative bg-white text-start overflow-hidden">
+            
+            <!-- Subtle Quote Backdrop Watermark -->
+            <div class="quote-watermark position-absolute top-0 end-0 p-3 pointer-events-none opacity-10">
+              <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="text-primary" viewBox="0 0 24 24">
+                <path d="M9.135 20H3V9.406C3 5.291 5.818 2.036 11 1l.806 1.862C8.918 3.65 7.194 5.408 6.818 8H9.135V20zm12 0H15V9.406C15 5.291 17.818 2.036 23 1l.806 1.862C20.918 3.65 19.194 5.408 18.818 8H21.135V20z"/>
+              </svg>
+            </div>
 
-  <!-- Cards Grid -->
-  <div class="testimonials-grid">
+            <!-- Top Ribbon Accent -->
+            <div class="card-ribbon position-absolute top-0 start-0 w-100"></div>
 
-    @for (item of testimonials; track item.name) {
+            <div class="card-body p-4 p-lg-5 d-flex flex-column justify-content-between position-relative z-1">
+              
+              <!-- Upper Content: Stars & Quote Icon -->
+              <div>
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                  <!-- Star Ratings -->
+                  <div class="d-flex gap-1 text-warning stars-wrapper">
+                    @for (star of getStars(item.stars); track $index) {
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    }
+                  </div>
+                  <!-- Mini Quote badge -->
+                  <div class="quote-mini text-primary bg-primary-subtle rounded-circle p-2 d-flex align-items-center justify-content-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M9.135 20H3V9.406C3 5.291 5.818 2.036 11 1l.806 1.862C8.918 3.65 7.194 5.408 6.818 8H9.135V20zm12 0H15V9.406C15 5.291 17.818 2.036 23 1l.806 1.862C20.918 3.65 19.194 5.408 18.818 8H21.135V20z"/>
+                    </svg>
+                  </div>
+                </div>
 
-      <div class="testimonial-card">
+                <!-- Main Testimonial Text -->
+                <p class="card-text text-secondary mb-4 quote-text">
+                  "{{ item.text }}"
+                </p>
+              </div>
 
-        <!-- Quote Icon -->
-        <div class="quote-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M9.135 20H3V9.406C3 5.291 5.818 2.036 11 1l.806 1.862C8.918 3.65 7.194 5.408 6.818 8H9.135V20zm12 0H15V9.406C15 5.291 17.818 2.036 23 1l.806 1.862C20.918 3.65 19.194 5.408 18.818 8H21.135V20z"/>
-          </svg>
-        </div>
+              <!-- Author / Reviewer Info Footer -->
+              <div class="d-flex align-items-center gap-3 pt-4 border-top border-light-subtle mt-auto author-row">
+                <!-- Avatar image with pure CSS initials fallback wrapper -->
+                <div class="avatar-container position-relative flex-shrink-0">
+                  <div class="avatar-initials rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold fs-6">
+                    {{ item.initials }}
+                  </div>
+                  @if (item.avatar) {
+                    <img [src]="item.avatar" [alt]="item.name" class="avatar-img rounded-circle position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
+                  }
+                </div>
 
-        <!-- Star Rating -->
-        <div class="stars">
-          @for (star of getStars(item.stars); track $index) {
-            <span class="star">&#9733;</span>
-          }
-        </div>
+                <!-- Credentials -->
+                <div>
+                  <h4 class="h6 fw-bold text-dark mb-0 author-name">
+                    {{ item.name }}
+                  </h4>
+                  <span class="text-xs text-primary fw-semibold d-block mt-1 author-role">
+                    {{ item.role }}
+                  </span>
+                </div>
+              </div>
 
-        <!-- Testimonial Text -->
-        <p class="testimonial-text">{{ item.text }}</p>
+            </div>
 
-        <!-- Author -->
-        <div class="author">
-          <div class="avatar">{{ item.initials }}</div>
-          <div class="author-info">
-            <strong class="author-name">{{ item.name }}</strong>
-            <span class="author-role">{{ item.role }}</span>
           </div>
         </div>
-
-      </div>
-
-    }
+      }
+    </div>
 
   </div>
-
 </section>
