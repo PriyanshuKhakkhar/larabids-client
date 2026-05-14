@@ -1,0 +1,245 @@
+<div class="about-page-container">
+  
+  <!-- SECTION 1 — High-Impact Hero Banner -->
+  <section class="about-hero-section position-relative py-5">
+    <div class="hero-bg-glow glow-1"></div>
+    <div class="hero-bg-glow glow-2"></div>
+
+    <div class="container position-relative z-2 py-4 py-lg-5 text-center">
+      
+      <!-- Trust Indicator Capsule -->
+      <div class="badge-pill mb-3 fade-in-up">
+        <i class="fas fa-globe me-2"></i> CERTIFIED TRANSPARENT LIQUIDITY
+      </div>
+
+      <h1 class="display-4 fw-extrabold mb-3 hero-title fade-in-up" style="animation-delay: 0.1s;">
+        About <span class="text-gradient">AngBids</span>
+      </h1>
+
+      <p class="lead text-secondary mb-5 mx-auto hero-subtitle fade-in-up" style="animation-delay: 0.2s;">
+        The premier real-time high-fidelity secondary asset clearing matrix empowering verified buyers and certified vendors through state-of-the-art secure bidding corridors.
+      </p>
+
+      <!-- Primary Action Controls -->
+      <div class="d-flex flex-wrap justify-content-center gap-3 fade-in-up" style="animation-delay: 0.3s;">
+        <a routerLink="/auctions" class="btn btn-primary btn-lg rounded-pill px-5 py-3 shadow-lg btn-glow fw-bold">
+          Explore Live Auctions
+        </a>
+        <a routerLink="/register" class="btn btn-outline-primary btn-lg rounded-pill px-5 py-3 bg-white text-primary fw-bold">
+          Join Vendor Roster
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 2 — Deep Company Story Matrix -->
+  <section class="company-story-section py-5 bg-white border-bottom border-light-subtle">
+    <div class="container py-lg-4">
+      <div class="row g-5 align-items-center">
+        
+        <!-- Left Side Story Accents -->
+        <div class="col-lg-6">
+          <span class="text-xs fw-extrabold text-primary tracking-widest text-uppercase d-block mb-2">Our Origins</span>
+          <h2 class="display-6 fw-extrabold text-dark mb-4 tracking-tight">Engineering Fair-Value Secondary Exchange Corridors</h2>
+          <p class="text-secondary mb-4 lh-lg font-medium">
+            Secondary asset liquidation historically suffered from opaque broker markup chains, fractured custodial records, and severe latency gaps during price discovery. AngBids was authored to replace these legacy silos with an automated, synchronized framework ensuring immediate market clearance.
+          </p>
+          <div class="p-4 bg-light-subtle rounded-4 border border-light-subtle shadow-sm">
+            <h4 class="h6 fw-bold text-primary mb-2">Why We Built This Platform</h4>
+            <p class="text-secondary text-sm mb-0">
+              To guarantee that every verified individual or certified institutional desk can route continuous competitive order streams backed by immutable custodial parameters and zero counterparty risk.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Side Mission & Vision Pillars -->
+        <div class="col-lg-6">
+          <div class="d-flex flex-column gap-4">
+            
+            <!-- Mission Card -->
+            <div class="card border-light-subtle bg-white p-4 rounded-4 shadow-sm hover-lift-subtle">
+              <div class="d-flex align-items-start gap-3">
+                <div class="icon-cube bg-primary-subtle text-primary rounded-3 p-3 flex-shrink-0 mt-1">
+                  <i class="fas fa-flag-checkered fa-lg"></i>
+                </div>
+                <div>
+                  <h3 class="h5 fw-bold text-dark mb-2">Our Mission</h3>
+                  <p class="text-secondary text-sm mb-0">
+                    Deliver unparalleled programmatic pricing liquidity for physical and digital real-world assets through fully validated, non-custodial matching environments.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vision Card -->
+            <div class="card border-light-subtle bg-white p-4 rounded-4 shadow-sm hover-lift-subtle">
+              <div class="d-flex align-items-start gap-3">
+                <div class="icon-cube bg-primary-subtle text-primary rounded-3 p-3 flex-shrink-0 mt-1">
+                  <i class="fas fa-eye fa-lg"></i>
+                </div>
+                <div>
+                  <h3 class="h5 fw-bold text-dark mb-2">Our Global Vision</h3>
+                  <p class="text-secondary text-sm mb-0">
+                    Establish the primary institutional baseline for real-time asset settlement globally, eliminating intermediate cross-border trade constraints completely.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 — Core Platform Stats Grid -->
+  <section class="platform-stats-section py-5 bg-light-subtle">
+    <div class="container py-lg-4">
+      
+      <!-- Trust Header -->
+      <div class="text-center max-w-3xl mx-auto mb-5">
+        <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-white text-primary fw-bold text-xs tracking-wide mb-3 border border-light-subtle shadow-sm">
+          <i class="fas fa-chart-line"></i>
+          <span>QUANTIFIABLE PLATFORM METRICS</span>
+        </div>
+        <h2 class="display-6 fw-extrabold text-dark mb-2 tracking-tight">Proven Secondary Exchange Liquidity</h2>
+        <p class="text-secondary lead mb-0 mx-auto" style="max-width: 680px;">
+          Synchronized real-time demand engines processing deep programmatic value distributions.
+        </p>
+      </div>
+
+      <!-- Stats Grid Matrix -->
+      <div class="row g-4 justify-content-center">
+        @for (stat of platformStats; track stat.id) {
+          <div class="col-sm-6 col-lg-3">
+            <div class="card stat-card h-100 border-0 bg-white premium-lift position-relative overflow-hidden">
+              
+              <!-- Gradient top accent bar -->
+              <div class="card-bg-accent position-absolute top-0 start-0 w-100 pointer-events-none" style="height: 4px;"></div>
+
+              <div class="card-body p-4 d-flex flex-column align-items-center text-center justify-content-between h-100">
+                <div class="stat-icon-wrapper rounded-circle d-flex align-items-center justify-content-center mb-3 flex-shrink-0 shadow-sm">
+                  @if (stat.id === 'auctions') {
+                    <i class="fas fa-gavel fa-lg"></i>
+                  } @else if (stat.id === 'users') {
+                    <i class="fas fa-users fa-lg"></i>
+                  } @else if (stat.id === 'sales') {
+                    <i class="fas fa-hand-holding-usd fa-lg"></i>
+                  } @else {
+                    <i class="fas fa-map-marked-alt fa-lg"></i>
+                  }
+                </div>
+
+                <div class="my-auto py-2 w-100">
+                  <h3 class="display-5 fw-extrabold text-primary mb-1 tracking-tight stat-counter">
+                    {{ stat.value }}
+                  </h3>
+                  <span class="h6 fw-bold text-dark d-block mb-1">
+                    {{ stat.label }}
+                  </span>
+                  <p class="text-secondary text-xs mb-0 mt-1 desc-text opacity-75">
+                    {{ stat.subtitle }}
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        }
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 4 — Why Choose Us Framework -->
+  <section class="why-choose-us-section py-5 bg-white border-bottom border-light-subtle">
+    <div class="container py-lg-4">
+      
+      <div class="text-center max-w-3xl mx-auto mb-5">
+        <span class="text-xs fw-extrabold text-primary tracking-widest text-uppercase d-block mb-2">Authoritative Advantages</span>
+        <h2 class="display-6 fw-extrabold text-dark mb-2 tracking-tight">Engineered For Zero Counterparty Friction</h2>
+        <p class="text-secondary lead mb-0 mx-auto" style="max-width: 680px;">
+          Review the institutional framework securing immediate clearance integrity.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        @for (benefit of chooseUsFeatures; track benefit.title) {
+          <div class="col-md-6 col-lg-3">
+            <div class="card benefit-card h-100 border border-light-subtle bg-white p-4 rounded-4 shadow-sm hover-lift">
+              <div class="benefit-icon bg-light-subtle text-primary rounded-circle d-flex align-items-center justify-content-center mb-3.5 border border-light-subtle" style="width: 48px; height: 48px;">
+                <i [class]="benefit.icon"></i>
+              </div>
+              <h3 class="h6 fw-bold text-dark mb-2 tracking-tight">{{ benefit.title }}</h3>
+              <p class="text-secondary text-xs mb-0 lh-base">{{ benefit.description }}</p>
+            </div>
+          </div>
+        }
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 5 — Elite Core Founding Team -->
+  <section class="team-section py-5 bg-light-subtle">
+    <div class="container py-lg-4">
+      
+      <div class="text-center max-w-3xl mx-auto mb-5">
+        <span class="text-xs fw-extrabold text-primary tracking-widest text-uppercase d-block mb-2">Leadership</span>
+        <h2 class="display-6 fw-extrabold text-dark mb-2 tracking-tight">Our Core Authors & Architects</h2>
+        <p class="text-secondary lead mb-0 mx-auto" style="max-width: 680px;">
+          Decades of integrated distributed systems engineering and structural derivatives expertise.
+        </p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        @for (member of teamMembers; track member.name) {
+          <div class="col-md-6 col-lg-4">
+            <div class="card team-card h-100 border-0 bg-white rounded-4 shadow-sm overflow-hidden premium-lift">
+              
+              <!-- Profile Avatar Header Layer -->
+              <div class="team-img-wrapper position-relative bg-light-subtle" style="height: 280px;">
+                <img [src]="member.avatar" [alt]="member.name" class="w-100 h-100 object-fit-cover">
+                <div class="position-absolute bottom-0 start-0 w-100 p-3 bg-gradient-dark-overlay"></div>
+              </div>
+
+              <div class="card-body p-4 flex-grow-1 d-flex flex-column justify-content-between">
+                <div>
+                  <h3 class="h5 fw-bold text-dark mb-1">{{ member.name }}</h3>
+                  <span class="text-xs fw-semibold text-primary d-block mb-3">{{ member.role }}</span>
+                  <p class="text-secondary text-xs mb-0 lh-relaxed">{{ member.bio }}</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        }
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 6 — Definitive Bottom Call To Action -->
+  <section class="cta-banner-section py-5 bg-primary text-white position-relative overflow-hidden">
+    <!-- Ambient dark/gradient background styling overlays -->
+    <div class="position-absolute inset-0 bg-gradient-cta pointer-events-none"></div>
+
+    <div class="container position-relative z-2 py-4 text-center">
+      <h2 class="display-5 fw-extrabold text-white mb-3 tracking-tight">Ready To Claim Verified Market Lots?</h2>
+      <p class="lead text-white-50 mb-4 mx-auto" style="max-width: 600px;">
+        Initialize your certified bidding parameters or list physical assets in minutes.
+      </p>
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a routerLink="/auctions" class="btn btn-light btn-lg rounded-pill px-5 py-3 text-primary fw-bold shadow-lg hover-scale">
+          Start Bidding Now
+        </a>
+        <a routerLink="/register" class="btn btn-outline-light btn-lg rounded-pill px-5 py-3 fw-bold hover-scale">
+          Create Account
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>

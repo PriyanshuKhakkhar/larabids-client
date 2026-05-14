@@ -1,0 +1,259 @@
+<div class="contact-page-container">
+  
+  <!-- SECTION 1 — Dedicated High-Impact Hero Presentation -->
+  <section class="contact-hero-section position-relative py-5">
+    <div class="hero-bg-glow glow-1"></div>
+    <div class="hero-bg-glow glow-2"></div>
+
+    <div class="container position-relative z-2 py-4 py-lg-5 text-center">
+      
+      <!-- Trust Tracker Indicator -->
+      <div class="badge-pill mb-3 fade-in-up">
+        <i class="fas fa-headset me-2"></i> AUTHORITATIVE CLIENT RELATIONS
+      </div>
+
+      <h1 class="display-4 fw-extrabold mb-3 hero-title fade-in-up" style="animation-delay: 0.1s;">
+        Contact <span class="text-gradient">AngBids</span>
+      </h1>
+
+      <p class="lead text-secondary mb-0 mx-auto hero-subtitle fade-in-up" style="animation-delay: 0.2s;">
+        Access institutional assistance routing networks, verified asset support pipelines, and cross-border escrow clearing desks immediately.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- SECTION 2 — Master Contact Info Cards Array -->
+  <section class="contact-info-section py-5 bg-light-subtle">
+    <div class="container py-lg-3">
+      
+      <div class="row g-4 justify-content-center">
+        @for (card of contactCards; track card.title) {
+          <div class="col-sm-6 col-xl-3">
+            <div class="card info-card h-100 border-0 bg-white p-4 rounded-4 shadow-sm text-center premium-lift position-relative overflow-hidden">
+              
+              <!-- Edge Highlight bar -->
+              <div class="card-bg-accent position-absolute top-0 start-0 w-100 pointer-events-none" style="height: 4px;"></div>
+
+              <div class="icon-circle bg-light-subtle text-primary rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3.5 border border-light-subtle shadow-sm flex-shrink-0" style="width: 56px; height: 56px;">
+                <i [class]="card.icon + ' fa-lg'"></i>
+              </div>
+
+              <h3 class="h6 fw-bold text-dark mb-1 tracking-tight">{{ card.title }}</h3>
+              <span class="text-primary fw-extrabold text-sm d-block mb-2 font-monospace">{{ card.detail }}</span>
+              <p class="text-secondary text-xs mb-0 mt-auto opacity-75 lh-base">{{ card.subtitle }}</p>
+
+            </div>
+          </div>
+        }
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 3 — Enterprise Reactive Form Architecture -->
+  <section class="contact-form-section py-5 bg-white border-top border-bottom border-light-subtle">
+    <div class="container py-lg-4">
+      
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+          
+          <div class="text-center mb-5">
+            <span class="text-xs fw-extrabold text-primary tracking-widest text-uppercase d-block mb-2">Direct Messaging Corridor</span>
+            <h2 class="display-6 fw-extrabold text-dark mb-2 tracking-tight">Route Operations Inquiry</h2>
+            <p class="text-secondary text-sm mb-0 mx-auto" style="max-width: 540px;">
+              Submit structured operational details below. Critical transaction parameters are logged directly with designated custody clearing controllers.
+            </p>
+          </div>
+
+          <!-- Dynamic Success Flash State Banner -->
+          @if (submissionSuccess) {
+            <div class="alert alert-success bg-success-subtle border-success-subtle text-success p-4 rounded-4 shadow-sm mb-4 fade-in-up d-flex align-items-start gap-3" role="alert">
+              <i class="fas fa-check-circle fa-2x flex-shrink-0 mt-0.5"></i>
+              <div>
+                <h4 class="h6 fw-bold mb-1">Transmission Completed Successfully</h4>
+                <p class="text-xs mb-0">Your payload has been securely verified and indexed into our operational queue. A designated clearing representative will trace parameter statuses shortly.</p>
+              </div>
+            </div>
+          }
+
+          <!-- Form Element Container -->
+          <div class="card border border-light-subtle bg-white p-4 p-md-5 rounded-4 shadow-sm">
+            <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate class="needs-validation">
+              
+              <div class="row g-4">
+                
+                <!-- Full Name Field mapped to payload property 'name' -->
+                <div class="col-md-6">
+                  <label for="nameInput" class="form-label text-xs fw-bold text-dark text-uppercase tracking-wider mb-2">
+                    Full Name <span class="text-danger">*</span>
+                  </label>
+                  <div class="input-group premium-input-group rounded-pill overflow-hidden">
+                    <span class="input-group-text bg-transparent border-0 text-secondary ps-3 pe-2">
+                      <i class="fas fa-user"></i>
+                    </span>
+                    <input type="text" id="nameInput" formControlName="name" 
+                           class="form-control border-0 shadow-none bg-transparent py-2.5 text-sm fw-medium" 
+                           placeholder="Alexander Sterling" 
+                           [class.is-invalid]="isInvalid('name')">
+                  </div>
+                  @if (isInvalid('name')) {
+                    <div class="text-danger text-xxs fw-bold mt-1.5 ps-3 fade-in">
+                      Please enter a valid full name (minimum 3 characters).
+                    </div>
+                  }
+                </div>
+
+                <!-- Email Input Box -->
+                <div class="col-md-6">
+                  <label for="emailInput" class="form-label text-xs fw-bold text-dark text-uppercase tracking-wider mb-2">
+                    Email Address <span class="text-danger">*</span>
+                  </label>
+                  <div class="input-group premium-input-group rounded-pill overflow-hidden">
+                    <span class="input-group-text bg-transparent border-0 text-secondary ps-3 pe-2">
+                      <i class="fas fa-envelope"></i>
+                    </span>
+                    <input type="email" id="emailInput" formControlName="email" 
+                           class="form-control border-0 shadow-none bg-transparent py-2.5 text-sm fw-medium" 
+                           placeholder="alexander@angbids.internal" 
+                           [class.is-invalid]="isInvalid('email')">
+                  </div>
+                  @if (isInvalid('email')) {
+                    <div class="text-danger text-xxs fw-bold mt-1.5 ps-3 fade-in">
+                      Please enter a valid working email routing address.
+                    </div>
+                  }
+                </div>
+
+                <!-- Phone Support routing String -->
+                <div class="col-md-6">
+                  <label for="phoneInput" class="form-label text-xs fw-bold text-dark text-uppercase tracking-wider mb-2">
+                    Phone Contact <span class="text-danger">*</span>
+                  </label>
+                  <div class="input-group premium-input-group rounded-pill overflow-hidden">
+                    <span class="input-group-text bg-transparent border-0 text-secondary ps-3 pe-2">
+                      <i class="fas fa-phone"></i>
+                    </span>
+                    <input type="tel" id="phoneInput" formControlName="phone" 
+                           class="form-control border-0 shadow-none bg-transparent py-2.5 text-sm fw-medium" 
+                           placeholder="+1 (555) 019-2834" 
+                           [class.is-invalid]="isInvalid('phone')">
+                  </div>
+                  @if (isInvalid('phone')) {
+                    <div class="text-danger text-xxs fw-bold mt-1.5 ps-3 fade-in">
+                      Please input a valid numeric phone string.
+                    </div>
+                  }
+                </div>
+
+                <!-- Subject Tracker Field -->
+                <div class="col-md-6">
+                  <label for="subjectInput" class="form-label text-xs fw-bold text-dark text-uppercase tracking-wider mb-2">
+                    Subject Header <span class="text-danger">*</span>
+                  </label>
+                  <div class="input-group premium-input-group rounded-pill overflow-hidden">
+                    <span class="input-group-text bg-transparent border-0 text-secondary ps-3 pe-2">
+                      <i class="fas fa-tag"></i>
+                    </span>
+                    <input type="text" id="subjectInput" formControlName="subject" 
+                           class="form-control border-0 shadow-none bg-transparent py-2.5 text-sm fw-medium" 
+                           placeholder="Escrow Clearance Inquiry" 
+                           [class.is-invalid]="isInvalid('subject')">
+                  </div>
+                  @if (isInvalid('subject')) {
+                    <div class="text-danger text-xxs fw-bold mt-1.5 ps-3 fade-in">
+                      Subject parameter header is mandatory.
+                    </div>
+                  }
+                </div>
+
+                <!-- Core Message Content Area -->
+                <div class="col-12">
+                  <label for="messageInput" class="form-label text-xs fw-bold text-dark text-uppercase tracking-wider mb-2">
+                    Detailed Payload Message <span class="text-danger">*</span>
+                  </label>
+                  <div class="premium-textarea-group rounded-4 overflow-hidden border border-light-subtle bg-light-subtle p-1">
+                    <textarea id="messageInput" formControlName="message" rows="5" 
+                              class="form-control border-0 shadow-none bg-transparent p-3 text-sm fw-medium" 
+                              placeholder="Please describe precise lots, reserve values, or API streaming credentials needed..."
+                              [class.is-invalid]="isInvalid('message')"></textarea>
+                  </div>
+                  @if (isInvalid('message')) {
+                    <div class="text-danger text-xxs fw-bold mt-1.5 ps-3 fade-in">
+                      Message payload must supply comprehensive verification details (min 10 chars).
+                    </div>
+                  }
+                </div>
+
+                <!-- Submit Button Trigger -->
+                <div class="col-12 mt-4 pt-2 text-center">
+                  <button type="submit" class="btn btn-premium-cta w-100 rounded-pill py-3 fw-bold text-xs tracking-widest text-uppercase shadow-sm d-flex align-items-center justify-content-center gap-2">
+                    <span>Send Message</span>
+                    <i class="fas fa-paper-plane"></i>
+                  </button>
+                  <span class="text-secondary text-xxs d-block mt-3 opacity-75">
+                    <i class="fas fa-lock me-1"></i> End-to-end payload routing encrypted via internal corporate TLS proxies.
+                  </span>
+                </div>
+
+              </div>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 4 — FAQ Quick Help Deck -->
+  <section class="faq-quick-help-section py-5 bg-light-subtle">
+    <div class="container py-lg-4">
+      
+      <div class="text-center max-w-3xl mx-auto mb-5">
+        <span class="text-xs fw-extrabold text-primary tracking-widest text-uppercase d-block mb-2">Instant Self-Service</span>
+        <h2 class="display-6 fw-extrabold text-dark mb-2 tracking-tight">FAQ Quick Help Access</h2>
+        <p class="text-secondary lead mb-0 mx-auto" style="max-width: 680px;">
+          Explore structured foundational items answering continuous integration parameters immediately.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        @for (faq of faqModules; track faq.title) {
+          <div class="col-md-6 col-xl-3">
+            <div class="card faq-card h-100 border border-light-subtle bg-white p-4 rounded-4 shadow-sm hover-lift">
+              <div class="faq-icon bg-primary-subtle text-primary rounded-3 p-2.5 d-inline-flex align-items-center justify-content-center mb-3 flex-shrink-0" style="width: 44px; height: 44px;">
+                <i [class]="faq.icon + ' fa-lg'"></i>
+              </div>
+              <h3 class="h6 fw-bold text-dark mb-2 tracking-tight">{{ faq.title }}</h3>
+              <p class="text-secondary text-xs mb-0 lh-relaxed">{{ faq.summary }}</p>
+            </div>
+          </div>
+        }
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 5 — Definitive Final Call To Action Banner -->
+  <section class="cta-banner-section py-5 bg-primary text-white position-relative overflow-hidden">
+    <div class="position-absolute inset-0 bg-gradient-cta pointer-events-none"></div>
+
+    <div class="container position-relative z-2 py-4 text-center">
+      <h2 class="display-5 fw-extrabold text-white mb-3 tracking-tight">Ready To Claim Verified Market Lots?</h2>
+      <p class="lead text-white-50 mb-4 mx-auto" style="max-width: 600px;">
+        Initialize your certified bidding parameters or list physical assets in minutes.
+      </p>
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a routerLink="/auctions" class="btn btn-light btn-lg rounded-pill px-5 py-3 text-primary fw-bold shadow-lg hover-scale">
+          Start Bidding Now
+        </a>
+        <a routerLink="/register" class="btn btn-outline-light btn-lg rounded-pill px-5 py-3 fw-bold hover-scale">
+          Create Account
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>
