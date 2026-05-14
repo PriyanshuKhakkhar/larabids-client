@@ -1,0 +1,66 @@
+<div class="card premium-filter-card border-0 bg-white p-4 shadow-sm rounded-4">
+  
+  <div class="d-flex align-items-center justify-content-between mb-4 pb-2 border-bottom border-light-subtle">
+    <div class="d-flex align-items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+      <h4 class="h6 fw-extrabold text-dark mb-0 tracking-tight">Filter Auctions</h4>
+    </div>
+    <button (click)="resetFilters()" class="btn btn-link text-xs text-secondary text-decoration-none p-0 fw-bold hover-primary">
+      Reset All
+    </button>
+  </div>
+
+  <div class="d-flex flex-column gap-4">
+    
+    <!-- Category Select Section -->
+    <div>
+      <label class="form-label text-xs fw-bold text-secondary text-uppercase tracking-wider mb-2">
+        Category Group
+      </label>
+      <select [(ngModel)]="selectedCategory" (change)="onFilterUpdate()" class="form-select elite-select text-sm py-2 rounded-3 shadow-none border-light-subtle bg-light-subtle font-medium">
+        @for (cat of categories; track cat) {
+          <option [value]="cat">{{ cat }}</option>
+        }
+      </select>
+    </div>
+
+    <!-- Condition Select Section -->
+    <div>
+      <label class="form-label text-xs fw-bold text-secondary text-uppercase tracking-wider mb-2">
+        Item Condition
+      </label>
+      <select [(ngModel)]="selectedCondition" (change)="onFilterUpdate()" class="form-select elite-select text-sm py-2 rounded-3 shadow-none border-light-subtle bg-light-subtle font-medium">
+        @for (cond of conditions; track cond) {
+          <option [value]="cond">{{ cond }}</option>
+        }
+      </select>
+    </div>
+
+    <hr class="my-0 border-light-subtle">
+
+    <!-- Toggle Quick Indicators -->
+    <div class="d-flex flex-column gap-2.5">
+      
+      <!-- Ending Soon Checkbox -->
+      <div class="form-check custom-check-elite">
+        <input [(ngModel)]="endingSoonOnly" (change)="onFilterUpdate()" class="form-check-input shadow-none cursor-pointer" type="checkbox" id="endingSoonCheck">
+        <label class="form-check-label text-xs text-dark cursor-pointer ms-1 fw-semibold d-flex align-items-center gap-1.5" for="endingSoonCheck">
+          <span class="status-dot bg-danger rounded-circle"></span>
+          <span>Ending Soon (< 1m left)</span>
+        </label>
+      </div>
+
+      <!-- Featured Only Checkbox -->
+      <div class="form-check custom-check-elite">
+        <input [(ngModel)]="featuredOnly" (change)="onFilterUpdate()" class="form-check-input shadow-none cursor-pointer" type="checkbox" id="featuredCheck">
+        <label class="form-check-label text-xs text-dark cursor-pointer ms-1 fw-semibold d-flex align-items-center gap-1.5" for="featuredCheck">
+          <span class="status-dot bg-warning rounded-circle"></span>
+          <span>Featured Auctions</span>
+        </label>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,128 @@
+$primary: #4f46e5;
+$primary-light: #818cf8;
+$dark-text: #0f172a;
+$secondary-text: #64748b;
+
+.auctions-page-wrapper {
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+// Hero display rules matched exactly to home design token standards
+.auctions-hero-section {
+  background: linear-gradient(135deg, #e4efff 0%, #d8cbff 100%);
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+// Background glowing nodes
+.hero-bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.glow-1 {
+  top: -20%;
+  left: -5%;
+  width: 50vw;
+  height: 50vw;
+  background: #a5b4fc;
+}
+
+.glow-2 {
+  bottom: -30%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: #c4b5fd;
+}
+
+// Custom typography tags
+.fw-extrabold {
+  font-weight: 800;
+  color: $dark-text;
+  letter-spacing: -0.02em;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.badge-pill {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: rgba(79, 70, 229, 0.1);
+  color: $primary;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(79, 70, 229, 0.2);
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #1e293b;
+  font-weight: 500;
+  max-width: 720px;
+}
+
+// Search & Sort Box integration styling
+.search-ribbon-card {
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  max-width: 780px;
+  margin: 0 auto;
+
+  input::placeholder {
+    color: #94a3b8;
+  }
+}
+
+.border-end-md {
+  @media (min-width: 768px) {
+    border-right: 1px solid rgba(226, 232, 240, 1);
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+// Layout helper constants
+.text-xs { font-size: 0.75rem; }
+.text-xxs { font-size: 0.65rem; }
+.tracking-wider { letter-spacing: 0.05em; }
+.tracking-widest { letter-spacing: 0.1em; }
+
+.hover-scale {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.sticky-sidebar {
+  position: sticky;
+  transition: top 0.3s ease;
+}
+
+// Adaptive Animation layers
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUpSaaS 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUpSaaS {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

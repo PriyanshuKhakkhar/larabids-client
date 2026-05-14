@@ -31,6 +31,16 @@ export class Navbar {
   // Toggle this boolean to test both Guest and Member states
   isLoggedIn = false;
   
+  isMobileMenuOpen = false;
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  closeMobileMenu() {
+    this.isMobileMenuOpen = false;
+  }
+  
   currentUser = {
     username: 'Demo User',
     email: 'demo@angbids.com',

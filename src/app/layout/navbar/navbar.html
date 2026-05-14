@@ -1,16 +1,21 @@
-<nav class="navbar navbar-expand-lg navbar-elite sticky-top">
-  <div class="container">
+<nav class="navbar navbar-expand-lg navbar-elite sticky-top position-relative">
+  <div class="container position-relative">
       <a class="navbar-brand text-decoration-none" routerLink="/">
           <i class="fas fa-gavel brand-icon fs-4"></i>
           <span class="gold-text display-font fw-bold fs-3">{{ brandName }}</span>
       </a>
       
-      <button class="navbar-toggler border-0 text-dark bg-light" type="button" data-bs-toggle="collapse"
-          data-bs-target="#navbarNav">
-          <i class="fas fa-bars"></i>
+      <!-- Custom Responsive Hamburger Trigger Button -->
+      <button class="btn btn-light border border-light-subtle rounded-circle shadow-sm p-2.5 d-lg-none transition-fast d-flex align-items-center justify-content-center" 
+              type="button" 
+              (click)="toggleMobileMenu()" 
+              style="width: 42px; height: 42px;"
+              aria-label="Toggle navigation drawer">
+          <i class="fas fs-5 text-dark" [class.fa-bars]="!isMobileMenuOpen" [class.fa-times]="isMobileMenuOpen"></i>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Pure Desktop Navigation Layout Layer: Completely hidden on tablet and mobile -->
+      <div class="d-none d-lg-flex align-items-center justify-content-between flex-grow-1 ms-lg-4">
           <ul class="navbar-nav mx-auto mb-3 mb-lg-0 align-items-lg-center mt-3 mt-lg-0">
               @for (item of navItems; track item.label) {
               <li class="nav-item">
@@ -139,5 +144,43 @@
               }
           </div>
       </div>
+
+      <!-- Integrated Responsive Slide-Down Mobile Drawer -->
+      @if (isMobileMenuOpen) {
+          <div class="card position-absolute top-100 start-0 w-100 border-0 bg-white shadow-lg rounded-bottom-4 p-4 d-lg-none mt-1 z-3 mobile-menu-dropdown animate-slide-down">
+              <div class="d-flex flex-column gap-3">
+                  
+                  <!-- Authentication Quick Actions -->
+                  <div class="d-flex flex-column gap-2">
+                      <span class="text-xs fw-bold text-secondary text-uppercase tracking-wider px-2 d-block mb-1">Account Actions</span>
+                      <a routerLink="/login" (click)="closeMobileMenu()" class="btn btn-outline-primary w-100 py-2.5 fw-bold text-sm rounded-pill text-center">
+                          Sign In
+                      </a>
+                      <a routerLink="/register" (click)="closeMobileMenu()" class="btn btn-primary w-100 py-2.5 fw-bold text-sm rounded-pill shadow-sm text-center">
+                          Join Now
+                      </a>
+                  </div>
+
+                  <hr class="my-1 border-light-subtle">
+
+                  <!-- Main Navigation List Links -->
+                  <div class="d-flex flex-column gap-2 pt-1">
+                      <span class="text-xs fw-bold text-secondary text-uppercase tracking-wider px-2 d-block mb-1">Navigation Menu</span>
+                      @for (item of navItems; track item.label) {
+                          <a [routerLink]="item.route" 
+                             (click)="closeMobileMenu()" 
+                             routerLinkActive="text-primary fw-bold bg-light-subtle" 
+                             [routerLinkActiveOptions]="{exact: item.route === '/'}"
+                             class="text-decoration-none text-dark py-2.5 px-3 rounded-3 transition-colors d-flex align-items-center justify-content-between mobile-nav-link">
+                              <span class="text-sm">{{ item.label }}</span>
+                              <i class="fas fa-chevron-right text-xs text-secondary opacity-50"></i>
+                          </a>
+                      }
+                  </div>
+
+              </div>
+          </div>
+      }
+
   </div>
 </nav>

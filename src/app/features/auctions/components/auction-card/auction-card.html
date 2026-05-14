@@ -1,0 +1,121 @@
+<div class="card premium-live-card h-100 border border-light-subtle bg-white position-relative">
+  
+  <!-- Image Area with Integrated Overlays -->
+  <div class="card-img-wrapper position-relative overflow-hidden">
+    <img [src]="item.image" [alt]="item.title" class="card-img-top zoom-img">
+    
+    <!-- Top Overlay Ribbons -->
+    <div class="position-absolute top-0 start-0 w-100 p-3 z-2 d-flex justify-content-between align-items-start pointer-events-none">
+      
+      <!-- Category & Condition Badges -->
+      <div class="d-flex flex-column gap-1 align-items-start">
+        <span class="badge premium-category-badge px-2.5 py-1 text-xs fw-bold rounded-pill shadow-sm">
+          {{ item.category }}
+        </span>
+        @if (item.isFeatured) {
+          <span class="badge bg-warning text-dark px-2 py-0.5 text-xxs fw-extrabold tracking-widest rounded-pill shadow-sm">
+            FEATURED
+          </span>
+        }
+      </div>
+
+      <!-- Status Badge -->
+      <div>
+        @if (item.status === 'LIVE') {
+          <span class="badge bg-success text-white shadow-sm px-2.5 py-1 fw-extrabold rounded-pill d-inline-flex align-items-center gap-1.5 status-pill">
+            <span class="dot-indicator"></span> <span class="text-xs">LIVE</span>
+          </span>
+        } @else if (item.status === 'ENDING_SOON') {
+          <span class="badge bg-danger text-white shadow-sm px-2.5 py-1 fw-extrabold rounded-pill d-inline-flex align-items-center gap-1.5 status-pill">
+            <span class="dot-indicator"></span> <span class="text-xs">HOT</span>
+          </span>
+        } @else {
+          <span class="badge bg-secondary text-white shadow-sm px-2.5 py-1 fw-extrabold rounded-pill text-xs">
+            CLOSED
+          </span>
+        }
+      </div>
+
+    </div>
+
+    <!-- Floating Countdown Timer Overlay -->
+    <div class="position-absolute bottom-0 start-50 translate-middle-x w-100 px-3 pb-3 z-2 overlay-timer-wrapper">
+      <div class="timer-container rounded-pill px-3 py-1.5 text-center shadow-sm d-flex align-items-center justify-content-center gap-2 mx-auto border" 
+           [class.ending-soon]="item.secondsLeft <= 60 && item.secondsLeft > 0"
+           [class.ended]="item.secondsLeft === 0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="clock-svg"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <span class="text-xs fw-extrabold timer-text tracking-tight">
+          @if (item.secondsLeft > 0) {
+            {{ formatTime(item.secondsLeft) }} <span class="text-xxs fw-medium opacity-75">Left</span>
+          } @else {
+            FINISHED
+          }
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card Body Content -->
+  <div class="card-body p-4 d-flex flex-column justify-content-between flex-grow-1">
+    
+    <!-- Top Section: Title & Embedded Seller Info -->
+    <div>
+      <div class="d-flex align-items-center gap-2 mb-2 pb-1 border-bottom border-light-subtle">
+        <img [src]="item.seller.avatar" class="rounded-circle seller-avatar" width="22" height="22" alt="Avatar">
+        <span class="text-xs text-secondary fw-medium text-truncate">{{ item.seller.name }}</span>
+        @if (item.seller.verified) {
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="text-primary flex-shrink-0"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1.25 15L6 12.25l1.41-1.41L10.75 14.17l6.84-6.84L19 8.75 10.75 17z"/></svg>
+        }
+      </div>
+
+      <h3 class="h6 fw-bold text-dark mb-3 auction-title">
+        {{ item.title }}
+      </h3>
+
+      <!-- Dynamic Combined Bids Context -->
+      <div class="mb-3 p-3 bg-light-subtle rounded-4 border border-light-subtle price-box">
+        <div class="d-flex justify-content-between align-items-baseline mb-1">
+          <span class="text-secondary text-xs fw-semibold">Current Value</span>
+          <span class="badge bg-white border border-light-subtle text-secondary text-xxs px-2 py-0.5 rounded-pill">
+            {{ item.bidsCount }} bids
+          </span>
+        </div>
+        <div class="d-flex justify-content-between align-items-baseline">
+          <span class="fs-4 fw-extrabold text-primary lh-1 price-highlight">
+            {{ item.currentBid }}
+          </span>
+          <span class="text-xxs text-secondary">Start: {{ item.startingPrice }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Section: Demand Gauge & Trigger CTA Button -->
+    <div class="mt-auto pt-2">
+      <!-- Premium Stripe/Linear Style Demand Factor Gauge -->
+      <div class="demand-factor-section">
+        <div class="demand-header">
+          <span class="demand-label">Demand Factor</span>
+          <span class="demand-value">{{ getProgress() }}%</span>
+        </div>
+        <div class="progress custom-progress">
+          <div class="progress-bar custom-progress-bar" 
+               role="progressbar" 
+               [style.width.%]="getProgress()" 
+               [class.bg-danger]="item.secondsLeft <= 60"
+               [class.bg-primary]="item.secondsLeft > 60">
+          </div>
+        </div>
+      </div>
+
+      <!-- Always Visible Action View Details Button -->
+      <a [routerLink]="['/auctions', item.id]" 
+         class="btn btn-premium-cta w-100 rounded-pill py-2.5 fw-bold text-xs tracking-widest text-uppercase d-flex align-items-center justify-content-center gap-2"
+         [class.disabled-cta]="item.secondsLeft === 0">
+        <span>View Details</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="cta-arrow"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+      </a>
+    </div>
+
+  </div>
+
+</div>

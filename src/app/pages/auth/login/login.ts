@@ -1,0 +1,36 @@
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [ReactiveFormsModule, RouterLink],
+  templateUrl: './login.html',
+  styleUrl: './login.scss'
+})
+export class LoginComponent {
+
+  loginForm: FormGroup;
+  submitted = false;
+  successMessage = '';
+
+  constructor(private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      rememberMe: [false]
+    });
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.loginForm.valid) {
+      this.successMessage = 'Authentication successful! Accessing vault...';
+      setTimeout(() => {
+        this.successMessage = '';
+      }, 4000);
+    }
+  }
+
+}

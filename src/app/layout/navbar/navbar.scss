@@ -143,6 +143,8 @@
         padding: 0.6rem 1.5rem;
         transition: var(--transition-smooth);
         letter-spacing: 0.3px;
+        cursor: pointer !important;
+        pointer-events: auto !important;
         
         &-primary {
             background: var(--primary-gradient);
@@ -264,4 +266,181 @@
     .nav-search .form-control:focus {
         width: 320px;
     }
+}
+
+// Responsive Mobile Drawer Additions
+.mobile-menu-dropdown {
+    border-radius: 24px !important;
+    border: 1px solid rgba(226, 232, 240, 0.9) !important;
+    box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.15), 0 0 0 1px rgba(15, 23, 42, 0.02) !important;
+    pointer-events: auto !important;
+    z-index: 1050 !important;
+    background-color: #ffffff !important;
+    
+    // Add margin space around drawer so it doesn't touch screen edges on mobile/tablet
+    top: calc(100% + 8px) !important;
+    width: calc(100% - 32px) !important;
+    left: 16px !important;
+    right: 16px !important;
+    max-width: 540px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    .btn {
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        width: 100% !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.mobile-nav-link {
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    
+    // Easy to tap targets with premium SaaS row padding
+    padding: 0.85rem 1rem !important;
+    
+    &:hover, &:active {
+        background-color: #f8fafc;
+        color: var(--primary) !important;
+        transform: translateX(4px);
+        
+        i {
+            color: var(--primary);
+            opacity: 1;
+        }
+    }
+}
+
+.animate-slide-down {
+    animation: slideDownDrawerSaaS 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform-origin: top center;
+}
+
+@keyframes slideDownDrawerSaaS {
+    from {
+        opacity: 0;
+        transform: translateY(-12px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+// Comprehensive Responsive Viewport Breakpoint Framework
+@media (max-width: 991px) {
+    .navbar-elite {
+        // Prevent layout overflow & ensure proper vertical flex alignment
+        padding: 0.6rem 0;
+        
+        .container {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+        }
+
+        // Align hamburger perfectly inline on the right axis
+        button.d-lg-none {
+            margin-left: auto;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    // Stacked full-width button overrides inside drawer layout
+    .mobile-menu-dropdown {
+        padding: 1.5rem !important;
+        
+        .btn {
+            padding-top: 0.75rem !important;
+            padding-bottom: 0.75rem !important;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-elite {
+        padding: 0.5rem 0;
+        
+        // Scale brand display font and icon down proportionally to avoid any truncation or wrapping
+        .navbar-brand {
+            .brand-icon {
+                font-size: 1.25rem !important;
+            }
+            .gold-text {
+                font-size: 1.35rem !important;
+            }
+        }
+    }
+
+    // Keep drawer margins distinct on narrow handheld widths
+    .mobile-menu-dropdown {
+        width: calc(100% - 24px) !important;
+        left: 12px !important;
+        right: 12px !important;
+        padding: 1.25rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-elite {
+        .navbar-brand {
+            .brand-icon {
+                font-size: 1.15rem !important;
+            }
+            .gold-text {
+                font-size: 1.25rem !important;
+            }
+        }
+
+        // Guarantee hamburger layout retains its square dimensions without squash
+        button.d-lg-none {
+            width: 38px !important;
+            height: 38px !important;
+            padding: 0.35rem !important;
+            
+            i {
+                font-size: 1rem !important;
+            }
+        }
+    }
+
+    .mobile-nav-link {
+        padding: 0.75rem 0.85rem !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+/* mobile drawer final fix */
+@media (max-width: 991px){
+
+  .mobile-menu-dropdown{
+
+    max-height: 70vh !important;
+    overflow-y: auto !important;
+
+    padding: 1rem !important;
+
+    top: calc(100% + 8px) !important;
+
+    border-radius: 18px !important;
+  }
+
+  .mobile-menu-dropdown hr{
+    margin: .75rem 0 !important;
+  }
+
+  .mobile-nav-link{
+    padding: 10px 14px !important;
+  }
+
+  .mobile-menu-dropdown .btn{
+    min-height: 44px;
+    margin-bottom: 6px;
+  }
+
 }

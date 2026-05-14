@@ -1,0 +1,193 @@
+<div class="auth-master-layout min-vh-100 d-flex flex-column">
+  <div class="row g-0 flex-grow-1">
+    
+    <!-- Left Showcase Column: Deep Premium Indigo & Floating Layered Mockups -->
+    <div class="col-12 col-lg-6 d-none d-lg-flex flex-column justify-content-between p-5 showcase-panel position-relative overflow-hidden">
+      
+      <!-- Ambient Backdrops & Dynamic Node Grid -->
+      <div class="ambient-glow-mesh position-absolute top-0 start-0 w-100 h-100 pointer-events-none"></div>
+      <div class="node-grid-overlay position-absolute top-0 start-0 w-100 h-100 pointer-events-none opacity-25"></div>
+
+      <!-- Header Ribbon -->
+      <div class="position-relative z-2">
+        <a routerLink="/" class="text-decoration-none d-inline-flex align-items-center gap-2.5 brand-link">
+          <span class="fs-4 fw-black text-white tracking-tight brand-text">AngBids</span>
+          <span class="badge premium-glass-badge px-2.5 py-1 text-xs fw-bold tracking-widest text-uppercase">MARKETPLACE NODE</span>
+        </a>
+      </div>
+
+      <!-- Core Value Proposition with Layered Glassmorphism Mockup Badge -->
+      <div class="position-relative z-2 my-auto pe-4 max-w-lg">
+        
+        <!-- Premium Floating Stats/Trust Indicator Mockup Card -->
+        <div class="floating-trust-badge p-3 rounded-4 mb-4 d-inline-flex align-items-center gap-3 backdrop-blur shadow-premium slide-float">
+          <div class="icon-ring rounded-circle d-flex align-items-center justify-content-center bg-primary bg-opacity-25 text-primary-light flex-shrink-0" style="width: 40px; height: 40px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          </div>
+          <div>
+            <div class="d-flex align-items-baseline gap-1">
+              <span class="fs-5 fw-extrabold text-white font-monospace tracking-tight">$428.5M</span>
+              <span class="text-xs text-primary-light fw-bold">&uarr; 14.2%</span>
+            </div>
+            <span class="text-xs text-light text-opacity-75 d-block mt-0.5">Active Network Liquidity Vetted</span>
+          </div>
+        </div>
+
+        <h1 class="display-5 fw-black text-white mb-4 lh-xs tracking-tight">
+          Secure private bidding parameters globally.
+        </h1>
+        <p class="text-light text-opacity-75 text-sm lh-relaxed mb-0 pe-lg-3">
+          Authenticate your terminal to review dynamic cryptographic maximum stakes, sync verified network custody ledgers, and execute instant high-value finalizations.
+        </p>
+      </div>
+
+      <!-- Trust Footer Highlights -->
+      <div class="position-relative z-2 d-flex align-items-center gap-4 pt-4 border-top border-white border-opacity-10">
+        <div class="d-flex align-items-center gap-2">
+          <span class="status-dot pulse-success rounded-circle"></span>
+          <span class="text-xs text-light text-opacity-75 fw-medium">Node Synchronized</span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-primary-light"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span class="text-xs text-light text-opacity-75 fw-medium">Zero-Knowledge Escrow</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Interaction Column: Elegant SaaS White Card Framework -->
+    <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center p-4 p-md-5 right-panel">
+      
+      <div class="w-100 max-w-md my-auto">
+        
+        <!-- Mobile Viewport Logo Fallback -->
+        <div class="text-center d-block d-lg-none mb-4">
+          <a routerLink="/" class="text-decoration-none text-primary fs-3 fw-black tracking-tight">AngBids</a>
+        </div>
+
+        <!-- Master State-of-the-Art Authorization Card -->
+        <div class="card elite-form-card border-0 bg-white p-4 p-md-5 shadow-elite rounded-5 position-relative overflow-hidden">
+          
+          <!-- Top Multi-Stop Linear Gradient Glow Edge -->
+          <div class="glow-edge-gradient position-absolute top-0 start-0 w-100"></div>
+
+          <!-- Welcome Back Context Header -->
+          <div class="mb-4 pb-2">
+            <h2 class="h3 fw-black text-dark mb-1 tracking-tight">Sign In</h2>
+            <p class="text-secondary text-xs mb-0">Enter your account access credentials below</p>
+          </div>
+
+          <!-- Alert Container Feedback -->
+          @if (successMessage) {
+            <div class="alert premium-success-alert text-xs fw-semibold py-2.5 px-3 mb-4 rounded-3 d-flex align-items-center gap-2 slide-down">
+              <span class="alert-icon-ring rounded-circle d-flex align-items-center justify-content-center bg-success text-white flex-shrink-0" style="width: 16px; height: 16px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              </span>
+              <span>{{ successMessage }}</span>
+            </div>
+          }
+
+          <!-- Integrated Reactive Form Engine -->
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="d-flex flex-column gap-3.5">
+            
+            <!-- Email Field Set -->
+            <div>
+              <label for="emailInput" class="form-label text-xs fw-bold text-dark mb-1.5 tracking-wide text-uppercase">
+                Email Address
+              </label>
+              <div class="input-group elite-input-group rounded-3 overflow-hidden transition-all border border-light-subtle bg-light-subtle">
+                <span class="input-group-text bg-transparent border-0 text-secondary ps-3 pe-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </span>
+                <input type="email" 
+                       id="emailInput" 
+                       formControlName="email" 
+                       class="form-control bg-transparent border-0 shadow-none ps-1 text-sm py-2.5" 
+                       [class.is-invalid]="submitted && loginForm.get('email')?.invalid"
+                       placeholder="name@company.com" 
+                       required>
+              </div>
+
+              <!-- Reactive Error Badges -->
+              @if (submitted && loginForm.get('email')?.invalid) {
+                <div class="text-danger text-xs mt-1.5 fw-medium d-flex align-items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                  @if (loginForm.get('email')?.errors?.['required']) {
+                    <span>Email address is required.</span>
+                  }
+                  @if (loginForm.get('email')?.errors?.['email']) {
+                    <span>Please supply a valid format.</span>
+                  }
+                </div>
+              }
+            </div>
+
+            <!-- Password Field Set -->
+            <div>
+              <div class="d-flex align-items-center justify-content-between mb-1.5">
+                <label for="passwordInput" class="form-label text-xs fw-bold text-dark mb-0 tracking-wide text-uppercase">
+                  Password
+                </label>
+                <a routerLink="/login" class="text-xs text-primary text-decoration-none fw-bold hover-underline">
+                  Forgot Password?
+                </a>
+              </div>
+              <div class="input-group elite-input-group rounded-3 overflow-hidden transition-all border border-light-subtle bg-light-subtle">
+                <span class="input-group-text bg-transparent border-0 text-secondary ps-3 pe-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                </span>
+                <input type="password" 
+                       id="passwordInput" 
+                       formControlName="password" 
+                       class="form-control bg-transparent border-0 shadow-none ps-1 text-sm py-2.5 font-monospace" 
+                       [class.is-invalid]="submitted && loginForm.get('password')?.invalid"
+                       placeholder="••••••••••••" 
+                       required>
+              </div>
+
+              <!-- Reactive Error Badges -->
+              @if (submitted && loginForm.get('password')?.invalid) {
+                <div class="text-danger text-xs mt-1.5 fw-medium d-flex align-items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                  @if (loginForm.get('password')?.errors?.['required']) {
+                    <span>Password token is required.</span>
+                  }
+                  @if (loginForm.get('password')?.errors?.['minlength']) {
+                    <span>Must be at least 6 characters long.</span>
+                  }
+                </div>
+              }
+            </div>
+
+            <!-- Custom Switch Matrix -->
+            <div class="form-check custom-check-elite mt-0.5">
+              <input class="form-check-input shadow-none cursor-pointer" type="checkbox" id="rememberSwitch" formControlName="rememberMe">
+              <label class="form-check-label text-xs text-secondary cursor-pointer ms-1 fw-medium" for="rememberSwitch">
+                Keep terminal active for 30 days
+              </label>
+            </div>
+
+            <!-- Absolute State-of-the-Art CTA Button -->
+            <button type="submit" class="btn btn-primary elite-submit-cta w-100 rounded-pill py-3 fw-bold text-xs text-uppercase tracking-wider mt-2 shadow-premium d-flex align-items-center justify-content-center gap-2">
+              <span>Access Secure Account</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="cta-arrow"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+            </button>
+
+          </form>
+
+          <!-- Alternative Registration Link Wrapper -->
+          <div class="text-center mt-4 pt-4 border-top border-light-subtle">
+            <span class="text-xs text-secondary">New to AngBids network?</span>
+            <a routerLink="/register" class="text-xs text-primary fw-extrabold text-decoration-none ms-1.5 hover-scale d-inline-block">
+              Create Account &rarr;
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

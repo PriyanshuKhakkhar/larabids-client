@@ -1,0 +1,231 @@
+// Premium SaaS Brand Design System configuration variables
+$primary: #4f46e5;
+$primary-hover: #4338ca;
+$primary-light: #818cf8;
+$text-dark: #0f172a;
+$text-secondary: #64748b;
+$border-radius-card: 28px;
+
+.auth-master-layout {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #f8fafc;
+}
+
+// Custom typography helper utilities
+.fw-black {
+  font-weight: 900;
+}
+
+.fw-extrabold {
+  font-weight: 800;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.lh-xs {
+  line-height: 1.1;
+}
+
+.lh-relaxed {
+  line-height: 1.7;
+}
+
+.tracking-tight {
+  letter-spacing: -0.02em;
+}
+
+.tracking-wide {
+  letter-spacing: 0.05em;
+}
+
+.tracking-widest {
+  letter-spacing: 0.1em;
+}
+
+// Left Showcase Visual Display Parameters
+.showcase-panel {
+  background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 50%, #812e2e 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+
+  .ambient-glow-mesh {
+    background: radial-gradient(circle at 80% 20%, rgba(79, 70, 229, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(129, 140, 248, 0.15) 0%, transparent 40%);
+  }
+
+  .node-grid-overlay {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}
+
+// Glassmorphism Badges
+.premium-glass-badge {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e0e7ff;
+}
+
+.floating-trust-badge {
+  background-color: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+  .backdrop-blur {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+// Right Interaction Panel Containers
+.right-panel {
+  background: radial-gradient(circle at top right, #ffffff 0%, #f8fafc 100%);
+}
+
+.elite-form-card {
+  border-radius: $border-radius-card;
+  box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.02);
+  border: 1px solid rgba(226, 232, 240, 0.8) !important;
+
+  // Custom multi-stop top edge line accent
+  .glow-edge-gradient {
+    height: 5px;
+    background: linear-gradient(90deg, #4f46e5 0%, #818cf8 50%, #c7d2fe 100%);
+  }
+}
+
+// Integrated Input Decorators
+.elite-input-group {
+  border-color: rgba(226, 232, 240, 0.8) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: #f8fafc !important;
+
+  &:focus-within {
+    background-color: #ffffff !important;
+    border-color: $primary !important;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1) !important;
+
+    span {
+      color: $primary !important;
+    }
+  }
+
+  input::placeholder {
+    color: #94a3b8;
+  }
+}
+
+// Micro-Interactions & Physics
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.hover-underline {
+  transition: opacity 0.2s ease;
+  
+  &:hover {
+    opacity: 0.8;
+    text-decoration: underline !important;
+  }
+}
+
+.hover-scale {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  &:hover {
+    transform: translateX(3px);
+  }
+}
+
+.elite-submit-cta {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  .cta-arrow {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25) !important;
+    background-color: $primary-hover;
+
+    .cta-arrow {
+      transform: translateX(3px);
+    }
+  }
+}
+
+// Indicator Dots
+.status-dot {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  
+  &.pulse-success {
+    background-color: #10b981;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+    animation: successPulseKey 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+  }
+}
+
+@keyframes successPulseKey {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+// Animation helpers
+.slide-float {
+  animation: floatSlow 6s ease-in-out infinite alternate;
+}
+
+@keyframes floatSlow {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-6px);
+  }
+}
+
+.slide-down {
+  animation: slideDownFade 0.3s ease forwards;
+}
+
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Structural sizing
+.max-w-lg {
+  max-width: 500px;
+}
+
+.max-w-md {
+  max-width: 420px;
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
