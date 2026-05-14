@@ -1,0 +1,219 @@
+// Variables matching website theme configuration
+$primary: #4f46e5;
+$primary-hover: #4338ca;
+$danger: #ef4444;
+$text-dark: #0f172a;
+$text-secondary: #64748b;
+$border-radius-card: 24px;
+
+.auction-details-preview {
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow: hidden;
+}
+
+// Custom typography classes
+.fw-extrabold {
+  font-weight: 800;
+  color: $text-dark;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.tracking-wide {
+  letter-spacing: 0.05em;
+}
+
+.tracking-tight {
+  letter-spacing: -0.01em;
+}
+
+// Main Preview Card
+.premium-details-card {
+  border-radius: $border-radius-card;
+  box-shadow: 0 10px 40px -10px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.02);
+
+  // Top static glow accent bar helper
+  .card-glow-edge {
+    height: 5px;
+    background: linear-gradient(90deg, #4f46e5 0%, #818cf8 50%, #e0e7ff 100%);
+  }
+}
+
+// Left side Showcase
+.main-image-showcase {
+  height: 420px;
+  
+  .preview-main-img {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &:hover {
+    .preview-main-img {
+      transform: scale(1.04);
+    }
+  }
+
+  .backdrop-blur {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+}
+
+// Thumbnails
+.thumbnail-btn {
+  height: 84px;
+  border: 2px solid transparent !important;
+  transition: all 0.3s ease;
+
+  .thumb-overlay {
+    background-color: rgba(15, 23, 42, 0.2);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    .thumb-overlay {
+      opacity: 1;
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  &.active {
+    border-color: $primary !important;
+    transform: scale(0.98);
+
+    .thumb-overlay {
+      opacity: 0 !important;
+    }
+  }
+}
+
+// Watchlist Button
+.watchlist-btn {
+  color: $text-secondary;
+  background-color: #f8fafc;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+
+  &:hover {
+    background-color: #f1f5f9;
+    color: $text-dark;
+  }
+
+  &.active-watch {
+    background-color: rgba(79, 70, 229, 0.08);
+    color: $primary;
+    border-color: rgba(79, 70, 229, 0.3);
+  }
+}
+
+// Bidding Matrix
+.bidding-matrix-box {
+  background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    animation: dangerPulse 1.5s infinite cubic-bezier(0.4, 0, 0.6, 1);
+  }
+}
+
+@keyframes dangerPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.2);
+  }
+}
+
+// Bid Input Controller
+.premium-bid-input {
+  border-color: rgba(226, 232, 240, 0.8) !important;
+  transition: all 0.2s ease;
+
+  &:focus-within {
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1) !important;
+    border-color: $primary !important;
+    background-color: #ffffff !important;
+  }
+
+  input:focus {
+    outline: none;
+  }
+}
+
+.place-bid-btn {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(79, 70, 229, 0.25) !important;
+    background-color: $primary-hover;
+  }
+}
+
+// History Scroll container
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(203, 213, 225, 0.8) transparent;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(203, 213, 225, 0.8);
+    border-radius: 10px;
+  }
+}
+
+.history-row {
+  &:hover {
+    background-color: #f8fafc !important;
+    border-color: rgba(203, 213, 225, 0.8) !important;
+  }
+
+  .bidder-dot {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+// Transitions
+.transition-all {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+// Animation helpers
+.slide-down-fade {
+  animation: slideDown 0.3s ease forwards;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

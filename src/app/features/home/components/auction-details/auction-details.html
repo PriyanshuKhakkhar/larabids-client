@@ -1,0 +1,224 @@
+<section class="auction-details-preview py-5 bg-light-subtle border-top border-bottom border-light-subtle">
+  <div class="container py-lg-4">
+    
+    <!-- Section Indicator Heading -->
+    <div class="mb-4 d-flex align-items-center justify-content-between">
+      <div>
+        <span class="text-xs fw-bold text-primary tracking-wide text-uppercase d-block mb-1">LIVE PREVIEW</span>
+        <h3 class="h4 fw-extrabold text-dark mb-0">Featured Lot Details</h3>
+      </div>
+      <span class="badge bg-white text-secondary border border-light-subtle px-3 py-2 text-xs fw-semibold shadow-sm">
+        Lot ID: <span class="text-primary">{{ auction.id }}</span>
+      </span>
+    </div>
+
+    <!-- Main Desktop-First Split Card Container -->
+    <div class="card premium-details-card border-0 bg-white p-4 p-lg-5 overflow-hidden position-relative">
+      
+      <!-- Top Subtle Glow Highlight -->
+      <div class="card-glow-edge position-absolute top-0 start-0 w-100 pointer-events-none"></div>
+
+      <div class="row g-5 align-items-start">
+        
+        <!-- Left Side Column: Interactive Preview Images Stack -->
+        <div class="col-12 col-lg-6">
+          
+          <!-- Large Product Image Showcase Wrapper -->
+          <div class="main-image-showcase rounded-4 overflow-hidden position-relative bg-light border border-light-subtle mb-3 shadow-sm">
+            <img [src]="activeImage" [alt]="auction.title" class="w-100 h-100 object-fit-cover preview-main-img transition-all">
+            
+            <!-- Floating Zoom Indicator Helper -->
+            <span class="position-absolute bottom-0 end-0 m-3 bg-dark bg-opacity-75 text-white rounded-circle p-2 d-flex align-items-center justify-content-center pointer-events-none text-xs backdrop-blur">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+            </span>
+          </div>
+
+          <!-- Thumbnails Row Grid -->
+          <div class="row g-3 justify-content-start thumbnails-grid">
+            @for (thumb of auction.thumbnails; track thumb) {
+              <div class="col-3">
+                <button type="button" 
+                        (click)="selectThumbnail(thumb)" 
+                        (mouseenter)="selectThumbnail(thumb)"
+                        class="btn p-0 border-0 w-100 rounded-3 overflow-hidden thumbnail-btn position-relative transition-all"
+                        [class.active]="activeImage === thumb">
+                  <img [src]="thumb" [alt]="auction.title" class="w-100 h-100 object-fit-cover">
+                  <!-- Active Overlay border wrapper -->
+                  <div class="thumb-overlay position-absolute top-0 start-0 w-100 h-100 transition-all"></div>
+                </button>
+              </div>
+            }
+          </div>
+
+          <!-- Description Accordion / Paragraph Preview -->
+          <div class="mt-4 pt-4 border-top border-light-subtle">
+            <h5 class="h6 fw-bold text-dark mb-2">Lot Overview</h5>
+            <p class="text-secondary text-xs lh-lg mb-0 pe-lg-3">
+              {{ auction.description }}
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Right Side Column: Metadata, Bidding Matrix, and State Logic -->
+        <div class="col-12 col-lg-6 d-flex flex-column justify-content-between h-100">
+          
+          <div>
+            <!-- Header elements: Category Badge & Title -->
+            <div class="d-flex align-items-center justify-content-between gap-2 mb-2">
+              <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1 text-xs fw-bold tracking-tight">
+                {{ auction.category }}
+              </span>
+              
+              <!-- Watchlist Toggle Action Button -->
+              <button type="button" 
+                      (click)="toggleWatchlist()" 
+                      class="btn btn-sm watchlist-btn rounded-pill d-inline-flex align-items-center gap-1.5 transition-all px-3 py-1 text-xs fw-semibold"
+                      [class.active-watch]="isWatchlisted">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" [attr.fill]="isWatchlisted ? 'currentColor' : 'none'" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                <span>{{ isWatchlisted ? 'Watchlisted' : 'Add to Watchlist' }}</span>
+              </button>
+            </div>
+
+            <h2 class="h3 fw-extrabold text-dark mb-3 lh-sm">
+              {{ auction.title }}
+            </h2>
+
+            <!-- Seller profile credential banner -->
+            <div class="seller-profile-banner p-3 rounded-3 bg-light-subtle border border-light-subtle d-flex align-items-center justify-content-between mb-4">
+              <div class="d-flex align-items-center gap-3">
+                <img [src]="auction.seller.avatar" [alt]="auction.seller.name" class="rounded-circle object-fit-cover border border-white shadow-sm" width="42" height="42">
+                <div>
+                  <div class="d-flex align-items-center gap-1">
+                    <span class="fw-bold text-sm text-dark">{{ auction.seller.name }}</span>
+                    @if (auction.seller.verified) {
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="text-primary"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    }
+                  </div>
+                  <span class="text-xs text-secondary d-block mt-0.5">
+                    Verified Vault Custodian &bull; <strong class="text-dark">{{ auction.seller.completedAuctions }}</strong> finalizations
+                  </span>
+                </div>
+              </div>
+
+              <!-- Rating Badge -->
+              <div class="text-end pe-1">
+                <span class="badge bg-warning-subtle text-dark fw-bold text-xs px-2 py-1 rounded">
+                  &starf; {{ auction.seller.rating }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Bidding Summary Block & Active Countdown Wrapper -->
+            <div class="bidding-matrix-box p-4 rounded-4 mb-4 position-relative overflow-hidden">
+              <div class="row g-4 align-items-center">
+                
+                <!-- Current Highest Bid -->
+                <div class="col-6 border-end border-light-subtle">
+                  <span class="text-xs text-secondary d-block mb-1 fw-medium">Current Highest Bid</span>
+                  <div class="d-flex align-items-baseline gap-1">
+                    <span class="fs-4 fw-extrabold text-primary tracking-tight">${{ auction.highestBid.toLocaleString() }}</span>
+                    <span class="text-xs text-secondary fw-semibold">USD</span>
+                  </div>
+                  <span class="text-xs text-muted d-block mt-1">
+                    Min next increment: <strong class="text-dark">${{ auction.minNextBid.toLocaleString() }}</strong>
+                  </span>
+                </div>
+
+                <!-- Live Countdown Timer Pulse -->
+                <div class="col-6 ps-lg-4">
+                  <div class="d-flex align-items-center gap-1.5 mb-1">
+                    <span class="pulse-dot bg-danger rounded-circle d-inline-block"></span>
+                    <span class="text-xs text-danger fw-bold tracking-wide text-uppercase">CLOSING IN</span>
+                  </div>
+                  <div class="timer-display fs-5 fw-extrabold text-dark font-monospace tracking-tight">
+                    {{ formatTimer(auction.secondsLeft) }}
+                  </div>
+                  <span class="text-xs text-secondary d-block mt-1">Network clock synchronized</span>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Place Bid Form Action Controller -->
+            <div class="place-bid-actions mb-4">
+              <div class="d-flex gap-2 align-items-center">
+                
+                <!-- Amount Controller Input -->
+                <div class="input-group premium-bid-input flex-grow-1 shadow-sm rounded-pill overflow-hidden p-1 border border-light-subtle bg-light-subtle">
+                  <span class="input-group-text bg-transparent border-0 text-secondary ps-3 pe-1 fw-bold text-xs">$</span>
+                  <input type="number" 
+                         [(ngModel)]="customBidAmount" 
+                         [min]="auction.minNextBid" 
+                         [step]="500" 
+                         class="form-control bg-transparent border-0 shadow-none ps-1 fw-bold text-sm text-dark font-monospace" 
+                         aria-label="Bid Amount">
+                  <span class="input-group-text bg-transparent border-0 text-secondary pe-3 ps-1 text-xs">USD</span>
+                </div>
+
+                <!-- Primary Submit CTA Button -->
+                <button type="button" 
+                        (click)="placeCustomBid()" 
+                        class="btn btn-primary place-bid-btn rounded-pill px-4 py-2.5 fw-bold text-xs text-uppercase tracking-wide d-inline-flex align-items-center gap-2 shadow-sm transition-all flex-shrink-0">
+                  <span>Place Bid</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+                </button>
+
+              </div>
+
+              <!-- Real-time Feedback alerts -->
+              @if (bidSuccessMessage) {
+                <div class="mt-2 text-success text-xs fw-semibold d-flex align-items-center gap-1 slide-down-fade">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                  <span>{{ bidSuccessMessage }}</span>
+                </div>
+              }
+            </div>
+
+          </div>
+
+          <!-- Bid History Logs Accordion / Mock Array Stack -->
+          <div class="bid-history-container pt-3 border-top border-light-subtle">
+            <div class="d-flex align-items-center justify-content-between mb-2.5">
+              <h5 class="h6 fw-bold text-dark mb-0 text-xs text-uppercase tracking-wide">
+                Live Bid History <span class="text-secondary fw-normal">({{ auction.bidHistory.length }})</span>
+              </h5>
+              <span class="text-xs text-primary fw-semibold flex-shrink-0 bg-primary-subtle px-2 py-0.5 rounded-pill">Real-time Node</span>
+            </div>
+
+            <!-- List wrapper -->
+            <div class="history-logs-box rounded-3 bg-light-subtle p-2 border border-light-subtle overflow-y-auto custom-scrollbar" style="max-height: 140px;">
+              <div class="d-flex flex-column gap-1.5">
+                @for (bid of auction.bidHistory; track $index) {
+                  <div class="d-flex align-items-center justify-content-between p-2 rounded bg-white border border-light-subtle text-xs transition-all history-row">
+                    
+                    <!-- Bidder Info -->
+                    <div class="d-flex align-items-center gap-2 pe-2 text-truncate">
+                      <span class="bidder-dot rounded-circle bg-secondary bg-opacity-25 p-1 d-inline-block"></span>
+                      <span class="fw-semibold text-dark text-truncate">{{ bid.bidderName }}</span>
+                      @if (bid.verified) {
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" class="text-primary flex-shrink-0" title="Verified Bidder"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                      }
+                    </div>
+
+                    <!-- Amount & Timestamp -->
+                    <div class="d-flex align-items-center gap-3 flex-shrink-0">
+                      <span class="text-secondary text-xs opacity-75">{{ bid.time }}</span>
+                      <span class="fw-bold text-primary font-monospace">${{ bid.amount.toLocaleString() }}</span>
+                    </div>
+
+                  </div>
+                }
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
