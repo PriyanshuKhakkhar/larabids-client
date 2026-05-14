@@ -1,33 +1,234 @@
-.live-section {
-  padding: 60px 80px;
+// Variables matching brand consistency
+$primary: #4f46e5;
+$primary-hover: #4338ca;
+$danger: #ef4444;
+$text-dark: #0f172a;
+$text-secondary: #64748b;
+$border-radius-card: 20px;
+
+.live-auctions-section {
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow: hidden;
 }
 
-.live-section h2 {
-  margin-bottom: 30px;
+// Typography custom helpers
+.fw-extrabold {
+  font-weight: 800;
+  color: $text-dark;
 }
 
-.live-grid {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+.text-xs {
+  font-size: 0.75rem;
 }
 
-.live-card {
-  width: 250px;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+.text-sm {
+  font-size: 0.875rem;
 }
 
-.price {
-  margin: 15px 0;
-  font-weight: bold;
+.tracking-wide {
+  letter-spacing: 0.05em;
 }
 
-.timer {
-  font-weight: bold;
+.tracking-tight {
+  letter-spacing: -0.01em;
 }
 
-.ended {
-  font-weight: bold;
+// Section Header Real-time Badge
+.badge-realtime {
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  background-color: rgba(239, 68, 68, 0.08) !important;
+}
+
+.pulse-ring-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: $danger;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid $danger;
+    animation: ripple 1.5s infinite cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+@keyframes ripple {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.spin-slow {
+  animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+// Live Cards
+.premium-live-card {
+  border-radius: $border-radius-card;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-color: rgba(226, 232, 240, 0.8) !important;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 35px -5px rgba(15, 23, 42, 0.08), 0 8px 15px -5px rgba(15, 23, 42, 0.03);
+    border-color: rgba(79, 70, 229, 0.25) !important;
+
+    .zoom-img {
+      transform: scale(1.08);
+    }
+
+    .auction-title {
+      color: $primary !important;
+    }
+
+    .btn-place-bid:not([disabled]) {
+      background-color: $primary-hover;
+      transform: scale(1.02);
+    }
+  }
+}
+
+// Image Wrapper & Overlays
+.card-img-wrapper {
+  height: 200px;
+  border-top-left-radius: $border-radius-card;
+  border-top-right-radius: $border-radius-card;
+  background-color: #f8fafc;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.5) 0%, rgba(15, 23, 42, 0) 50%);
+    z-index: 1;
+    pointer-events: none;
+  }
+}
+
+.zoom-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.live-pill {
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  background-color: $danger !important;
+}
+
+.dot-indicator {
+  width: 6px;
+  height: 6px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+  0% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+.glass-pill {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(4px);
+}
+
+// Adaptive Countdown Container
+.overlay-timer-wrapper {
+  z-index: 3 !important;
+}
+
+.timer-container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-color: rgba(255, 255, 255, 0.8) !important;
+  color: $text-dark;
+  transition: all 0.3s ease;
+  max-width: 90%;
+
+  .clock-svg {
+    color: $primary;
+    transition: color 0.3s ease;
+  }
+
+  // Adaptive styles
+  &.ending-soon {
+    background: rgba(239, 68, 68, 0.95);
+    border-color: rgba(239, 68, 68, 0.3) !important;
+    color: #ffffff;
+
+    .clock-svg, .timer-text, .opacity-75 {
+      color: #ffffff !important;
+    }
+  }
+
+  &.ended {
+    background: rgba(100, 116, 139, 0.9);
+    color: #ffffff;
+    
+    .clock-svg, .timer-text {
+      color: #ffffff !important;
+    }
+  }
+}
+
+// Card Body Components
+.auction-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+  height: 2.8em;
+  transition: color 0.2s ease;
+}
+
+.price-box {
+  background-color: #f8fafc !important;
+  border-color: rgba(241, 245, 249, 1) !important;
+}
+
+.custom-progress-bar {
+  transition: width 0.5s ease;
+}
+
+// Custom CTA Button
+.btn-place-bid {
+  background-color: $primary;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 0.9rem;
+
+  &[disabled] {
+    background-color: #cbd5e1 !important;
+    color: #64748b !important;
+    opacity: 1 !important;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+}
+
+// Responsive Grid Alignment tweaks
+@media (max-width: 575px) {
+  .card-img-wrapper {
+    height: 180px;
+  }
+  .auction-title {
+    font-size: 1rem;
+  }
 }

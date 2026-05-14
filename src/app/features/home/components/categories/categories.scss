@@ -1,29 +1,113 @@
-.categories {
-  padding: 60px 80px;
+// Variables matching global premium styling
+$primary: #4f46e5;
+$primary-hover: #4338ca;
+$text-dark: #0f172a;
+$text-secondary: #64748b;
+$border-radius-card: 20px;
+
+.categories-section {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #ffffff;
 }
 
-.categories h2 {
-  margin-bottom: 30px;
-  font-size: 32px;
-  font-weight: bold;
+// Custom typography classes
+.fw-extrabold {
+  font-weight: 800;
+  color: $text-dark;
+  letter-spacing: -0.01em;
 }
 
-.category-grid {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+.text-xs {
+  font-size: 0.75rem;
 }
 
+.tracking-wide {
+  letter-spacing: 0.05em;
+}
+
+.badge-category {
+  border-color: rgba(79, 70, 229, 0.2) !important;
+  background-color: rgba(79, 70, 229, 0.05) !important;
+}
+
+// Category Cards
 .category-card {
-  width: 200px;
-  padding: 30px;
-  text-align: center;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,.1);
-  cursor: pointer;
+  border-radius: $border-radius-card;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+  border-color: rgba(226, 232, 240, 0.8) !important;
+
+  // Subtle background overlay
+  .card-bg-gradient {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.02) 0%, rgba(79, 70, 229, 0) 60%);
+    transition: opacity 0.4s ease;
+    border-radius: inherit;
+  }
+
+  .icon-wrapper {
+    width: 56px;
+    height: 56px;
+    background-color: #f8fafc;
+    color: $primary;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(226, 232, 240, 0.6);
+  }
+
+  .category-title {
+    transition: color 0.2s ease;
+  }
+
+  .desc-text {
+    line-height: 1.4;
+  }
+
+  .explore-link {
+    transition: all 0.2s ease;
+    
+    .arrow-icon {
+      transition: transform 0.2s ease;
+    }
+  }
+
+  // Lift and highlight on hover
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px -5px rgba(15, 23, 42, 0.08), 0 8px 12px -5px rgba(15, 23, 42, 0.03);
+    border-color: rgba(79, 70, 229, 0.25) !important;
+
+    .card-bg-gradient {
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.06) 0%, rgba(79, 70, 229, 0) 80%);
+    }
+
+    .icon-wrapper {
+      background-color: $primary;
+      color: #ffffff;
+      transform: scale(1.05);
+      border-color: $primary;
+    }
+
+    .category-title {
+      color: $primary !important;
+    }
+
+    .explore-link {
+      color: $primary-hover !important;
+
+      .arrow-icon {
+        transform: translateX(4px);
+      }
+    }
+  }
 }
 
-.icon {
-  font-size: 40px;
-  margin-bottom: 15px;
+// Utility overlays
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.pointer-events-none {
+  pointer-events: none;
 }
