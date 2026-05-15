@@ -1,0 +1,27 @@
+<aside class="sidebar" [class.collapsed]="isCollapsed">
+  <div class="sidebar-header">
+    <div class="logo">
+      <i class="fa-solid fa-gavel logo-icon"></i>
+      <span class="logo-text" *ngIf="!isCollapsed">AUCTION<br>ADMIN</span>
+    </div>
+  </div>
+
+  <div class="sidebar-content">
+    @for (section of menuSections; track section.title) {
+      <div class="menu-section">
+        <div class="section-title" *ngIf="section.title && !isCollapsed">{{ section.title }}</div>
+        <div class="section-divider" *ngIf="section.title && isCollapsed"></div>
+        <ul class="menu-items">
+          @for (item of section.items; track item.label) {
+            <li>
+              <a [routerLink]="item.route" class="menu-link" [class.active]="item.active" [title]="isCollapsed ? item.label : ''">
+                <i [class]="item.icon + ' menu-icon'"></i>
+                <span class="menu-label" *ngIf="!isCollapsed">{{ item.label }}</span>
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+</aside>

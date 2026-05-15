@@ -1,0 +1,133 @@
+.sidebar {
+  width: 260px;
+  background-color: #4361ee;
+  color: #ffffff;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  transition: width 0.3s ease;
+  z-index: 50;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+
+  &.collapsed {
+    width: 70px;
+
+    .sidebar-header .logo {
+      justify-content: center;
+      padding: 0;
+    }
+
+    .menu-link {
+      justify-content: center;
+      padding: 12px 0;
+      
+      .menu-icon { margin: 0; font-size: 20px; }
+    }
+  }
+
+  &::-webkit-scrollbar { width: 6px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 3px; }
+}
+
+.sidebar-header {
+  padding: 20px 20px;
+  display: flex;
+  align-items: center;
+  height: 70px; // matches topbar height
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+
+    .logo-icon {
+      font-size: 28px;
+      transform: rotate(-15deg);
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1.2;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+  }
+}
+
+.sidebar-content {
+  padding: 20px 0;
+}
+
+.menu-section {
+  margin-bottom: 16px;
+
+  .section-title {
+    padding: 0 24px;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .section-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 8px 16px;
+  }
+
+  .menu-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li { margin: 0; }
+
+    .menu-link {
+      display: flex;
+      align-items: center;
+      padding: 12px 24px;
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+
+      .menu-icon {
+        width: 24px;
+        font-size: 16px;
+        opacity: 0.8;
+      }
+
+      .menu-label {
+        margin-left: 8px;
+        white-space: nowrap;
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: #ffffff;
+      }
+
+      &.active {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        border-left-color: #ffffff;
+        font-weight: 600;
+
+        .menu-icon { opacity: 1; }
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+<div class="table-responsive">
+  <table class="data-table">
+    <thead>
+      <tr>
+        @for (col of columns; track col.key) {
+          <th>{{ col.label }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of data; track row) {
+        <tr>
+          @for (col of columns; track col.key) {
+            <td>
+              <ng-container *ngIf="!col.type || col.type === 'text'">
+                <!-- special hardcoded handling for category styling to match screenshot -->
+                <ng-container *ngIf="col.key === 'category'; else plainText">
+                  <span class="text-muted"><i class="fa-solid fa-tag fa-sm"></i> {{ row[col.key] }}</span>
+                </ng-container>
+                <ng-template #plainText>{{ row[col.key] }}</ng-template>
+              </ng-container>
+              
+              <ng-container *ngIf="col.type === 'badge'">
+                <span class="badge" [ngClass]="'badge-' + row[col.key]?.toLowerCase()">
+                  {{ row[col.key] }}
+                </span>
+              </ng-container>
+              
+              <ng-container *ngIf="col.type === 'action'">
+                <button class="btn-icon-outline"><i class="fa-regular fa-eye"></i></button>
+              </ng-container>
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
