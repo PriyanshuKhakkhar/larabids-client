@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild, ElementRef, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild, ElementRef, PLATFORM_ID, Inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private dashboardService: DashboardService,
+    private cdr: ChangeDetectorRef,
     @Inject(PLATFORM_ID) platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
@@ -51,6 +52,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
         next: (res) => {
           this.data = res;
           this.isLoading = false;
+          this.cdr.markForCheck();
           if (this.isBrowser) {
             setTimeout(() => this.initCharts(), 0);
           }
@@ -58,6 +60,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
         error: (err) => {
           console.error('Error fetching dashboard data', err);
           this.isLoading = false;
+          this.cdr.markForCheck();
         }
       });
   }

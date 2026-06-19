@@ -68,15 +68,6 @@
         <!-- Master State-of-the-Art Authorization Card -->
         <div class="card elite-form-card border-0 bg-white p-4 p-md-5 shadow-elite rounded-5 position-relative overflow-hidden">
           
-          <!-- Top Multi-Stop Linear Gradient Glow Edge -->
-          <div class="glow-edge-gradient position-absolute top-0 start-0 w-100"></div>
-
-          <!-- Welcome Back Context Header -->
-          <div class="mb-4 pb-2">
-            <h2 class="h3 fw-black text-dark mb-1 tracking-tight">Sign In</h2>
-            <p class="text-secondary text-xs mb-0">Enter your account access credentials below</p>
-          </div>
-
           <!-- Alert Container Feedback -->
           @if (successMessage) {
             <div class="alert premium-success-alert text-xs fw-semibold py-2.5 px-3 mb-4 rounded-3 d-flex align-items-center gap-2 slide-down">
@@ -86,6 +77,24 @@
               <span>{{ successMessage }}</span>
             </div>
           }
+
+          @if (errorMessage) {
+            <div class="alert premium-danger-alert text-xs fw-semibold py-2.5 px-3 mb-4 rounded-3 d-flex align-items-center gap-2 slide-down">
+              <span class="alert-icon-ring rounded-circle d-flex align-items-center justify-content-center bg-danger text-white flex-shrink-0" style="width: 16px; height: 16px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+              </span>
+              <span>{{ errorMessage }}</span>
+            </div>
+          }
+
+          <!-- Top Multi-Stop Linear Gradient Glow Edge -->
+          <div class="glow-edge-gradient position-absolute top-0 start-0 w-100"></div>
+
+          <!-- Welcome Back Context Header -->
+          <div class="mb-4 pb-2">
+            <h2 class="h3 fw-black text-dark mb-1 tracking-tight">Sign In</h2>
+            <p class="text-secondary text-xs mb-0">Enter your account access credentials below</p>
+          </div>
 
           <!-- Integrated Reactive Form Engine -->
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="d-flex flex-column gap-3.5">

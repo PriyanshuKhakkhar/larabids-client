@@ -14,10 +14,17 @@
         <ul class="menu-items">
           @for (item of section.items; track item.label) {
             <li>
-              <a [routerLink]="item.route" class="menu-link" [class.active]="item.active" [title]="isCollapsed ? item.label : ''">
-                <i [class]="item.icon + ' menu-icon'"></i>
-                <span class="menu-label" *ngIf="!isCollapsed">{{ item.label }}</span>
-              </a>
+              @if (item.label === 'Logout') {
+                <a href="javascript:void(0)" (click)="onLogout($event)" class="menu-link" [title]="isCollapsed ? item.label : ''">
+                  <i [class]="item.icon + ' menu-icon'"></i>
+                  <span class="menu-label" *ngIf="!isCollapsed">{{ item.label }}</span>
+                </a>
+              } @else {
+                <a [routerLink]="item.route" class="menu-link" [class.active]="item.active" [title]="isCollapsed ? item.label : ''">
+                  <i [class]="item.icon + ' menu-icon'"></i>
+                  <span class="menu-label" *ngIf="!isCollapsed">{{ item.label }}</span>
+                </a>
+              }
             </li>
           }
         </ul>

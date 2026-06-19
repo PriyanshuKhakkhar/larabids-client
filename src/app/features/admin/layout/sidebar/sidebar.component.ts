@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { LayoutService } from '../../services/layout.service';
+import { AuthService } from '../../../../core/services/auth.service';
 
 interface MenuSection {
   title?: string;
@@ -50,7 +51,24 @@ export class SidebarComponent implements OnInit {
     }
   ];
 
-  constructor(private layoutService: LayoutService) {}
+  constructor(
+    private layoutService: LayoutService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  onLogout(event: Event): void {
+    event.preventDefault();
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/login']);
+      },
+      error: () => {
+        // Even if API fails, clear local session and go to login
+        this.router.navigate(['/login']);
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.layoutService.isSidebarCollapsed$.subscribe(

@@ -229,3 +229,24 @@ $border-radius-card: 28px;
 .pointer-events-none {
   pointer-events: none;
 }
+
+// Alert Designs
+.premium-success-alert {
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: #065f46;
+  
+  .alert-icon-ring {
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+  }
+}
+
+.premium-danger-alert {
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #991b1b;
+  
+  .alert-icon-ring {
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+  }
+}
